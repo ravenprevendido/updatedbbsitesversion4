@@ -18,8 +18,8 @@ const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
     }, 1000);
   })
   return (
-    <div className='h-full w-full z-99 bg-white/20 backdrop-blur-md top-1/2 left-1/2 -translate-1/2 flex items-center justify-center fixed'>
-        <div className='h-2/3 w-1/2 bg-white rounded-2xl shadow-inner p-3 flex flex-col gap-2'>
+    <div className='h-full  w-full z-99 bg-white/20 backdrop-blur-md top-1/2 left-1/2 -translate-1/2 flex items-center justify-center fixed'>
+        <div className='h-2/3 lg:h-2/3 w-1/2 bg-white rounded-2xl shadow-inner p-3 flex flex-col gap-2'>
             <div className='w-full flex justify-between'>
                 <h1>Thank you for visiting us! Learn more about us by watching this video.</h1>
                 <span className='flex gap-3'>

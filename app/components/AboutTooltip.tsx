@@ -15,11 +15,13 @@ const AboutTooltip: React.FC<AboutTooltipProps> = ({ aboutus }) => {
   const pathname = usePathname();
 
   const handleClick = (label: string) => {
+
     const routeMap: Record<string, string> = {
       'About Us': '/about#about-us',
       'Mission and Vission': '/about#mission-and-vision',
       'Why Choose Burnbox Printing?': '#why-choose-burnbox',
     };
+
     const target = routeMap[label];
     if (!target) return;
     if (label === 'Why Choose Burnbox Printing?') {
@@ -35,6 +37,7 @@ const AboutTooltip: React.FC<AboutTooltipProps> = ({ aboutus }) => {
       router.push(target); // About Us and Mission navigate normally
     }
   };
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}

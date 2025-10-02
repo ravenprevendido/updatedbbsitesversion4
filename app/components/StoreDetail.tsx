@@ -10,9 +10,9 @@ interface StoreDetailProps {
 const StoreDetail: React.FC<StoreDetailProps> = ({ onDirectionClick }) => {
 
   return (
-    <div className='text-white space-y-4 text-sm font-light'>
+    <div className='text-white space-y-3   lg:space-y-4  lg:p-2 text-sm font-light'>
 
-        <div>
+        <div className=''>
             <h2 className='text-lg font-semibold'>Our Stores</h2>
             <p className='flex items-start gap-2 mt-2'>
             <FaLocationDot className='text-pink-500 mt-1'/>
@@ -23,7 +23,6 @@ const StoreDetail: React.FC<StoreDetailProps> = ({ onDirectionClick }) => {
             </span>
             </p>
         </div>
-
         <div className='flex items-start gap-2'>
             <FaCalendar className='mt-1 text-pink-500'/>
             <p>Mon - Fri, 8:00 am - 10:00PM</p>

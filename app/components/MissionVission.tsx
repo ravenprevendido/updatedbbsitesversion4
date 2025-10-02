@@ -49,7 +49,7 @@ const MissionVission = () => {
             src="/visionimages.png"
             alt="Vision"
             draggable="false"
-            className=" absolute left-1/2  lg:-top-1/5 -translate-x-1/2
+            className=" absolute left-1/2 lg:left-5/6 lg:-top-1/5 -translate-x-1/2
             translate-y-[-200px] sm:translate-y-[-60px] md:translate-y-[-80px] lg:translate-y-[-140px]
             w-[200px] sm:w-[120px] md:w-[150px] lg:w-[240px]
             rotate-[10deg] sm:rotate-[15deg] md:rotate-[20deg] lg:rotate-[25deg]
