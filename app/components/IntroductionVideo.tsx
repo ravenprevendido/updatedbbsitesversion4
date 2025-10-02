@@ -10,34 +10,49 @@ const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
   const [enableExit, setEnableExit] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-        if (skipTimer > 0) {
-            setSkipTimer((prev: number) => (prev - 1));
-        }
-        if (skipTimer === 1) { setEnableExit(true); }
+    const timer = setTimeout(() => {
+      if (skipTimer > 0) {
+        setSkipTimer((prev: number) => prev - 1);
+      }
+      if (skipTimer === 1) {
+        setEnableExit(true);
+      }
     }, 1000);
-  })
+    return () => clearTimeout(timer);
+  }, [skipTimer]);
   return (
-    <div className='h-full  w-full z-99 bg-white/20 backdrop-blur-md top-1/2 left-1/2 -translate-1/2 flex items-center justify-center fixed'>
-        <div className='h-2/3 lg:h-2/3 w-1/2 bg-white rounded-2xl shadow-inner p-3 flex flex-col gap-2'>
-            <div className='w-full flex justify-between'>
-                <h1>Thank you for visiting us! Learn more about us by watching this video.</h1>
-                <span className='flex gap-3'>
-                    <p>You can skip after {skipTimer} seconds</p>
-                    <button 
-                        type="button" 
-                        className={`text-xl p-0.5 rounded-full ${enableExit ? 'border border-rose-500 text-rose-500' : 'border border-transparent bg-black/20 text-black/40'}`}
-                        disabled={!enableExit}
-                        onClick={() => isVideoVisible(false)}
-                    ><HiOutlineX /></button>
-                </span>
-            </div>
-            <div className='h-full w-full bg-gray-300 rounded-md flex items-center justify-center text-9xl text-gray-600'>
-                <HiVideoCamera />
-            </div>
+    <div className="h-full w-full z-[99] bg-black/40 backdrop-blur-md top-0 left-0 fixed flex items-center justify-center px-4">
+      <div className="h-auto w-full sm:w-3/4 lg:w-1/2 bg-white rounded-2xl shadow-lg p-5 flex flex-col gap-4">
+        
+        {/* Header Section */}
+        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <h1 className="text-sm sm:text-base md:text-lg font-medium leading-relaxed text-gray-800">
+            Thank you for visiting us! Learn more about us by watching this video.
+          </h1>
+          <span className="flex items-center gap-3 text-sm sm:text-base">
+            <p className="text-gray-600">You can skip after {skipTimer} seconds</p>
+            <button
+              type="button"
+              className={`text-lg p-1 rounded-full transition ${
+                enableExit
+                  ? 'border border-rose-500 text-rose-500 hover:bg-rose-100'
+                  : 'border border-transparent bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+              disabled={!enableExit}
+              onClick={() => isVideoVisible(false)}
+            >
+              <HiOutlineX />
+            </button>
+          </span>
         </div>
+
+        {/* Video Placeholder */}
+        <div className="h-48 sm:h-64 md:h-80 w-full bg-gray-200 rounded-md flex items-center justify-center text-6xl sm:text-7xl md:text-8xl text-gray-500">
+          <HiVideoCamera />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default IntroductionVideo

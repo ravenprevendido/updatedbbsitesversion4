@@ -1,59 +1,58 @@
-<motion.div
-  initial={{opacity: 0, y: 30}}
-  whileInView={{opacity: 1, y: 0}}
-  transition={{duration: 0.6}}
-  viewport={{once: false}}
-  className="relative z-10 bg-[#4A4A4A] rounded-lg p-10 sm:p-10 md:p-20 text-center shadow-lg flex flex-col items-center justify-start h-full"
->
-  <img 
-    src="/missionimage.png" 
-    alt="mission" 
-    draggable="false"
-    className="absolute top-12 sm:top-16 left-1/2 -translate-x-1/2 -translate-y-full 
-               rotate-[-10deg] sm:rotate-[-20deg] md:rotate-[-40deg] 
-               w-[120px] sm:w-[160px] md:w-[220px] 
-               h-auto object-contain z-0"
-  />
-  <h3 className="text-[25px] font-bold mb-2 mt-4 text-pink-500">Our Mission</h3>
-  <p className="text-[16px] sm:text-base md:text-lg leading-relaxed">
-    To exceed client expectations by delivering innovative printing solutions, exceptional services continuous improvement in everything we do.
-  </p>
-</motion.div>
-.
+"use client";
 
+import { IntroductionVideoProps } from '@/types';
+import React, { useEffect, useState } from 'react'
+import { HiOutlineX } from 'react-icons/hi'
+import { HiVideoCamera } from 'react-icons/hi2'
 
+const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
+  const [skipTimer, setSkipTimer] = useState(5);
+  const [enableExit, setEnableExit] = useState(false);
 
-<motion.div
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.2 }}
-  viewport={{ once: false }}
-  className="relative z-10 bg-[#4A4A4A] rounded-lg p-20 text-center shadow-lg flex flex-col justify-start h-full"
->
-  <img
-    src="/visionimages.png"
-    alt="Vision"
-    draggable="false"
-    className="absolute top-12 left-1/2 -translate-x-1/2 -translate-y-full 
-               rotate-[30deg] w-[220px] h-auto object-contain z-0"
-  />
-  <h3 className="text-lg font-bold mb-2 mt-4">Our Vision</h3>
-  <p className="text-lg leading-relaxed">
-    To become the go-to creative printing partner for businesses nationwide, recognized for reliability, creativity, and quality that inspires clients to recommend us again and again.
-  </p>
-</motion.div>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (skipTimer > 0) {
+        setSkipTimer((prev: number) => prev - 1);
+      }
+      if (skipTimer === 1) {
+        setEnableExit(true);
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [skipTimer]);
+  return (
+    <div className="h-full w-full z-[99] bg-black/40 backdrop-blur-md top-0 left-0 fixed flex items-center justify-center px-4">
+      <div className="h-auto w-full sm:w-3/4 lg:w-1/2 bg-white rounded-2xl shadow-lg p-5 flex flex-col gap-4">
+        
+        {/* Header Section */}
+        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <h1 className="text-sm sm:text-base md:text-lg font-medium leading-relaxed text-gray-800">
+            Thank you for visiting us! Learn more about us by watching this video.
+          </h1>
+          <span className="flex items-center gap-3 text-sm sm:text-base">
+            <p className="text-gray-600">You can skip after {skipTimer} seconds</p>
+            <button
+              type="button"
+              className={`text-lg p-1 rounded-full transition ${
+                enableExit
+                  ? 'border border-rose-500 text-rose-500 hover:bg-rose-100'
+                  : 'border border-transparent bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+              disabled={!enableExit}
+              onClick={() => isVideoVisible(false)}
+            >
+              <HiOutlineX />
+            </button>
+          </span>
+        </div>
 
+        {/* Video Placeholder */}
+        <div className="h-48 sm:h-64 md:h-80 w-full bg-gray-200 rounded-md flex items-center justify-center text-6xl sm:text-7xl md:text-8xl text-gray-500">
+          <HiVideoCamera />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-<motion.div
-        initial={{opacity: 0, y: 30}}
-        whileInView={{opacity: 1, y: 0}}
-        transition={{duration: 0.6}}
-        viewport={{once: false}}
-        className='relative bg-[#4A4A4A] rounded-lg p-10 sm:p-10 md:p-20 text-center shadow-lg flex flex-col items-center justify-start h-full'
-
-
-         <img src="/missionimage.png" alt="mission" draggable="false" 
-          className='absolute top-12 sm:top-20 left-1/5 -translate-x-2/3  -translate-y-full 
-               rotate-[-10deg] sm:rotate-[-20deg] md:rotate-[-40deg] 
-               w-[120px] sm:w-[160px] md:w-[220px] 
-               h-auto object-contain z-[-1]'
+export default Introducti
