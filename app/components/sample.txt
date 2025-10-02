@@ -1,0 +1,22 @@
+{/* Other ways to contact */}
+<div className="mt-6 text-center">
+  <h3 className="text-lg font-medium mb-4 text-gray-200">
+    Other ways to contact
+  </h3>
+  <div className="flex justify-center gap-6 text-gray-400">
+    <p>+63 917 700 8364</p>
+    <p>+63 977 247 3179</p>
+  </div>
+  <div className="flex justify-center items-center gap-2 mt-2">
+    <FaFacebook className="text-gray-400" />
+    <span>burnboxprintingburnboxprinting.com</span>
+  </div>
+</div>
+
+{/* Back Arrow */}
+<div className="w-full flex justify-end mt-3 mb-2">
+  <FaArrowLeft 
+    onClick={closeModal} 
+    className="text-pink-500 cursor-pointer text-xl"
+  />
+</div>
