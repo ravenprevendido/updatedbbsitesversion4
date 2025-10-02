@@ -1,114 +1,59 @@
-import { motion } from 'framer-motion'
-import React from 'react'
-import MissionVission from './MissionVission'
-
-const AboutPages = () => {
-  return (
-    <section className="min-h-[100vh] text-white flex flex-col relative items-center overflow-hidden">
-      {/* background image desktop only */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="relative w-full max-w-10xl flex flex-col items-center"
-      >
-        <img
-          src="/vsvissionabout.png"
-          alt="Hand"
-          className="absolute right-0 top-0 w-[1000px] opacity-70 pointer-events-none select-none hidden md:block"
-          style={{ zIndex: 0 }}
-        />
-      </motion.div>
-
-      {/* About section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="relative w-full max-w-7xl flex flex-col items-center"
-      >
-        <div className="mt-20 flex flex-col items-center relative">
-          {/* Hand image */}
-          <img
-            alt="Hand"
-            src="/aboutimage1.png"
-            className="
-              w-[180px] md:w-auto
-              relative md:absolute
-              md:-top-[2rem] md:rotate-[10deg] md:right-2/4 md:-translate-x-1/2
-              z-10
-            "
-          />
-
-          {/* Text box */}
-          <div className="relative bg-[#4a4a4a] mt-6 md:mt-20 p-4 md:p-10 w-[90%] md:max-w-3xl rounded-lg text-white text-center shadow-lg z-0">
-            <p className="text-base md:text-xl leading-relaxed">
-              Founded in 2015, Burnbox Printing has grown from a small printing shop
-              into one of the most trusted partners for businesses and individuals in
-              signage fabrication, large-format printing, and creative branding
-              solutions. We don't just print—we bring ideas to life, transforming
-              concepts into powerful visuals that build brands, attract customers, and
-              leave lasting impressions.
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      <MissionVission />
-    </section>
-  )
-}
-
-export default AboutPages
-
-
-
-<img
-  alt="Hand"
-  src="/aboutimage1.png"
-  className="
-    w-[180px] md:w-auto
-    relative z-10
-    -mb-6   /* ✅ overlap sa text box mobile */
-    md:absolute md:-top-[2rem] md:rotate-[10deg] md:right-2/4 md:-translate-x-1/2
-  "
-/>
-
-
-<div
-  className="
-    relative 
-    bg-[#4a4a4a]  
-    mt-10        /* default mobile */
-    p-4          /* mas maliit na padding sa mobile */
-    max-w-sm     /* mas maliit na lapad sa mobile */
-    rounded-lg 
-    text-white 
-    text-center 
-    shadow-lg
-    sm:p-6 
-    sm:max-w-md 
-    md:mt-20     /* mas malaki margin sa desktop */
-    md:p-10      /* mas maluwag padding sa desktop */
-    md:max-w-3xl /* mas wide sa desktop */
-  "
+<motion.div
+  initial={{opacity: 0, y: 30}}
+  whileInView={{opacity: 1, y: 0}}
+  transition={{duration: 0.6}}
+  viewport={{once: false}}
+  className="relative z-10 bg-[#4A4A4A] rounded-lg p-10 sm:p-10 md:p-20 text-center shadow-lg flex flex-col items-center justify-start h-full"
 >
-  <p className="text-base sm:text-lg md:text-xl leading-relaxed">
-    Founded in 2015, Burnbox Printing has grown from a small printing shop...
+  <img 
+    src="/missionimage.png" 
+    alt="mission" 
+    draggable="false"
+    className="absolute top-12 sm:top-16 left-1/2 -translate-x-1/2 -translate-y-full 
+               rotate-[-10deg] sm:rotate-[-20deg] md:rotate-[-40deg] 
+               w-[120px] sm:w-[160px] md:w-[220px] 
+               h-auto object-contain z-0"
+  />
+  <h3 className="text-[25px] font-bold mb-2 mt-4 text-pink-500">Our Mission</h3>
+  <p className="text-[16px] sm:text-base md:text-lg leading-relaxed">
+    To exceed client expectations by delivering innovative printing solutions, exceptional services continuous improvement in everything we do.
   </p>
-</div>
+</motion.div>
+.
 
 
-<img
-  alt="Hand"
-  src="/aboutimage1.png"
-  className="
-    absolute 
-    -top-2 
-    right-2/4 
-    -translate-x-1/2
-    rotate-0       /* default (mobile) */
-    sm:rotate-6    /* tablet */
-    md:rotate-12   /* desktop */
-  "
-/>
+
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  viewport={{ once: false }}
+  className="relative z-10 bg-[#4A4A4A] rounded-lg p-20 text-center shadow-lg flex flex-col justify-start h-full"
+>
+  <img
+    src="/visionimages.png"
+    alt="Vision"
+    draggable="false"
+    className="absolute top-12 left-1/2 -translate-x-1/2 -translate-y-full 
+               rotate-[30deg] w-[220px] h-auto object-contain z-0"
+  />
+  <h3 className="text-lg font-bold mb-2 mt-4">Our Vision</h3>
+  <p className="text-lg leading-relaxed">
+    To become the go-to creative printing partner for businesses nationwide, recognized for reliability, creativity, and quality that inspires clients to recommend us again and again.
+  </p>
+</motion.div>
+
+
+<motion.div
+        initial={{opacity: 0, y: 30}}
+        whileInView={{opacity: 1, y: 0}}
+        transition={{duration: 0.6}}
+        viewport={{once: false}}
+        className='relative bg-[#4A4A4A] rounded-lg p-10 sm:p-10 md:p-20 text-center shadow-lg flex flex-col items-center justify-start h-full'
+
+
+         <img src="/missionimage.png" alt="mission" draggable="false" 
+          className='absolute top-12 sm:top-20 left-1/5 -translate-x-2/3  -translate-y-full 
+               rotate-[-10deg] sm:rotate-[-20deg] md:rotate-[-40deg] 
+               w-[120px] sm:w-[160px] md:w-[220px] 
+               h-auto object-contain z-[-1]'

@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="bg-black text-white px-6 sm:px-10 py-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-8">
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-6 text-sm font-extralight w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-sm font-extralight w-full">
           {/* Column 1: Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-2 text-pink-400">Quick Links</h4>
@@ -38,7 +38,7 @@ const Footer = () => {
 
           {/* Column 4: Follow Us */}
           <div>
-            <h4 className="text-lg font-semibold mb-2 text-pink-400">Follow Us</h4>
+            <h4 className="text-lg font-semibold  text-pink-400">Follow Us</h4>
             <div className="flex space-x-4 text-2xl">
               <a href="https://www.facebook.com/photo/?fbid=1237045431770415&set=a.469292898545676" target="_blank" rel="noopener noreferrer">
                 <FaFacebook className="bg-[#1877F2] rounded-full w-6 h-6" />

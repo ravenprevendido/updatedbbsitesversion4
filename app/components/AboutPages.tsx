@@ -21,6 +21,7 @@ const AboutPages = () => {
         <motion.div
           initial={{opacity: 0, y: 30}}
           animate={{opacity: 1, y: 0}} 
+          viewport={{once: true}}
           transition={{duration: 0.8, ease: 'easeOut'}}
           className='relative w-full max-w-7xl flex flex-col items-center'
         >

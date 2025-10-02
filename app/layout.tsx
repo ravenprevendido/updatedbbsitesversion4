@@ -30,7 +30,6 @@ export default function RootLayout({
           <HeaderProvider>
             <Suspense fallback={<div></div>}><Header /></Suspense>
             {children}
-          
           </HeaderProvider>
         </TooltipProvider>
       </body>

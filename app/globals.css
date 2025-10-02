@@ -14,7 +14,9 @@
   --color-lightpink: #e89bb0;
 }
 
-
+*{
+  user-select: none;
+}
 
 ::-webkit-scrollbar {
   width: 7px !important;
@@ -39,6 +41,7 @@ body {
 button {
   cursor: pointer !important;
 }
+
 
 
 html,

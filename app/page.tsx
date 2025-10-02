@@ -25,7 +25,7 @@ export default function Home() {
     }
   }, [videoVisible]);
   return (
-    <main className="h-full max-w-full flex flex-col bg-black relative overflow-x-hidden p-0 m-0">
+    <main className="h-full max-w-full flex flex-col  bg-black relative overflow-x-hidden p-0 m-0">
       <Suspense fallback={<></>}>
       <Header />
         </Suspense>
