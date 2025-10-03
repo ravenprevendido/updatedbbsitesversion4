@@ -23,19 +23,19 @@
         {/* Show INQUIRE US only if cards ARE shown */}
         {showCards && (
           <motion.h3
-            className="text-4xl font-semibold text-center text-pink mb-10 uppercase "
+            className="text-[25px] font-semibold lg:text-4xl pt-20 lg:pt-0  text-center text-pink mt-20 lg:mt-1    lg:mb-10  uppercase "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            CHOOSE REPRESENTATIVE SALES
+            CHOOSE REPRESENTATIVE SALES 
           </motion.h3>
         )}
         {/* Cards container */}
         <AnimatePresence>
           {showCards && (
             <motion.div
-              className=" flex flex-col md:flex-row justify-center items-start gap-10  w-full max-w-5xl mx-auto  mt-20"
+              className=" flex flex-col md:flex-row justify-center items-start gap-7 lg:gap-10  w-full max-w-5xl mx-auto  mt-10 lg:mt-20"
               initial={{ opacity: 0, filter: 'blur(6px)' }}
               animate={{ opacity: 1, filter: 'blur(0)' }}
               transition={{ duration: 0.8 }}
@@ -82,7 +82,6 @@
                       : 
                       <a href="mailto:aljun.sales@burnboxprinting.com">aljun.sales@burnboxprinting.com</a>}
                   </p>
-
                     <p className="mb-4 text-base text-white">
                       Address: {person === 'person1' ? '17 Vatican City Dr, BF Resort Village, Talon 2, Las Piñas City' : '17 Vatican City Dr, BF Resort Village, Talon 2, Las Piñas City'}
                     </p>
@@ -117,6 +116,5 @@
       </section>
     );
   };
-
-
   export default ContactPopup;
+

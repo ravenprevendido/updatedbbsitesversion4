@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react'
 import ImageCard from './ImageCard'
 import ServiceDescription from './ServiceDescription'
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { title } from 'process';
-import { image } from 'framer-motion/client';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useHeaderContext } from '../context/HeaderContext';
@@ -219,7 +217,7 @@ const ServicesInfo: React.FC<Props> = ({
     setSelectedFeatures(null);
   };
 
-  // ✅ Effect to handle both header selection & query param
+  //  Effect to handle both header selection & query param
   const { selectedServiceFromHeader, setSelectedServiceFromHeader } = useHeaderContext();
 
 
@@ -239,16 +237,15 @@ useEffect(() => {
       );
     }
 
-    // ✅ clear context after opening so you can trigger again
+    //  clear context after opening so you can trigger again
     setSelectedServiceFromHeader(null);
   }
 }, [selectedServiceFromHeader]);
 
-  // ✅ Filter cards
+  // Filter cards
   const filterCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchValue.toLowerCase())
   );
-
   return (
     <section
       id="gallery"

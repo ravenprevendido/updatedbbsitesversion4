@@ -134,7 +134,7 @@ const ServiceDescription: React.FC<Props> = ({ image, title, description, featur
 
 {/* Image Slider */}
 <div className='-mt-20'>
-<p className="text-black font-regular text-center  lg:mt-10 mt-30 md:py-16 text-2xl font-bold">
+<p className="text-black font-regular text-center  lg:mt-25 mt-30 md:py-16 text-2xl font-bold">
   You might want also like this
 </p>
 </div>
@@ -193,7 +193,7 @@ const ServiceDescription: React.FC<Props> = ({ image, title, description, featur
           {selectedTitle}
         </h2>
         <p className="text-xs sm:text-sm text-center text-gray-400 mt-2">{description}</p>
-        <p className="text-pink-400 font-medium text-xs sm:text-sm text-center mt-3">Key Features</p>
+        <p className="text-pink-400 font-medium text-xs lg:text-[18px] sm:text-sm text-center mt-3">Key Features</p>
         <ul className="text-left text-xs sm:text-sm pl-4 text-gray-300 mt-2 space-y-1">
           {features.map((feature, index) => (
             <li key={index}>{feature}</li>
@@ -243,7 +243,6 @@ const ServiceDescription: React.FC<Props> = ({ image, title, description, featur
                   }
                     e.preventDefault();
                 }}
-
                 type="tel"
                 pattern="^\+63[0-9]{10}$"
                 className="w-full p-2 rounded-md bg-[#333] border border-gray-600 text-white"

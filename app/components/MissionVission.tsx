@@ -56,7 +56,7 @@ const MissionVission = () => {
             h-auto object-contain z-[-1]"
           />
           {/* Content */}
-          <h3 className="text-lg font-bold mb-10 lg:mb-10 mt-4">Our Vision</h3>
+          <h3 className="text-lg lg:text-[25px] font-bold mb-10 lg:mb-10 mt-4">Our Vision</h3>
           <p className="text-lg leading-relaxed">
 To become the go-to creative printing partner for businesses nationwide, recognized for reliability, creativity, and quality that inspires clients to recommend us again and again.          </p>
         </motion.div>
