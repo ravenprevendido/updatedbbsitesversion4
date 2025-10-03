@@ -430,7 +430,8 @@ const handleMobileNavClick = (id: string) => {
             router.push('/#home')
             setMobileMenuOpen(false)
           } else if (isContact) {
-            router.push('/#contact')
+            router.push('/contact#contact')
+            setMobileMenuOpen(false)
           } else {
             handleMobileNavClick(item.toLowerCase());
             setShowAboutTooltip(false);
@@ -452,7 +453,7 @@ const handleMobileNavClick = (id: string) => {
           )}
         </button>
       </div>
-      {/* Submenu */}
+      {/* Submenu */}   
       <AnimatePresence>
       {isAbout && showAboutTooltip && (
         <motion.div

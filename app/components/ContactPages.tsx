@@ -19,7 +19,7 @@
       }
     }, [showPopup]);
     return (
-      <section className="custom-gallery-bg relative w-full min-h-screen flex flex-col items-center justify-center text-white px-4 bg-black/50 backdrop-blur-sm md:overflow-y-hidden">
+      <section id='Contact' className="custom-gallery-bg relative w-full min-h-screen flex flex-col items-center justify-center text-white px-4 bg-black/50 backdrop-blur-sm md:overflow-y-hidden">
         {/* Show INQUIRE US only if cards ARE shown */}
         {showCards && (
           <motion.h3
@@ -35,7 +35,7 @@
         <AnimatePresence>
           {showCards && (
             <motion.div
-              className=" flex flex-col md:flex-row justify-center items-start gap-7 lg:gap-10  w-full max-w-5xl mx-auto  mt-10 lg:mt-20"
+              className=" flex flex-col md:flex-row justify-center items-start gap-7 lg:gap-10    w-full max-w-5xl mx-auto  mt-10 lg:mt-20 lg:z-0 "
               initial={{ opacity: 0, filter: 'blur(6px)' }}
               animate={{ opacity: 1, filter: 'blur(0)' }}
               transition={{ duration: 0.8 }}
@@ -43,7 +43,7 @@
               {['person1', 'person2'].map((person) => (
                 <motion.div
                   key={person}
-                  className={`bg-black rounded-2xl w-full md:w-[55%] lg:w-[45%] xl:w-[95%] md:xl-[45%] shadow-lg max-w-xl  min-h-[300px] sm:p-4 p-3 cursor-pointer flex flex-row scale-80   sm:scale-95 md:scale-100 text-white mx-auto relative ${person === 'person1'   ? 'md:relative md:left-[-180px]' : ''}`}
+                  className={`bg-black rounded-2xl -ml-4  lg:ml-0 w-full md:w-[55%] lg:w-[45%] xl:w-[95%] md:xl-[45%] shadow-lg max-w-xl  min-h-[300px] sm:p-4 p-3 cursor-pointer flex flex-row scale-80   sm:scale-95 md:scale-100 text-white mx-auto ${person === 'person1'   ? 'md:relative md:left-[-180px]' : ''}`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 40 }}
@@ -51,15 +51,14 @@
                   transition={{ duration: 0.7 }}
                 >
                   {/* Left side: Text content */}
-                  <div className="flex flex-col flex-1 pr-8">
+                  <div className="flex flex-col flex-1 pr-7 lg:pr-8 lg:mb-0 mb-3">
                     {/* ... rest of card content unchanged */}
-                    <h3 className="text-3xl font-bold text-pink mb-1">
+                    <h3 className="text-3xl font-bold text-pink mb-2 lg:mb-1">
                       {person === 'person1' ? 'JOHANNAH MAE' : 'ALJUN PEREIRA'}
                     </h3>
                     <p className="mb-3 font-semibold text-white text-lg">
                       {person === 'person1' ? 'SALES REPRESENTATIVE' : 'SALES CONSULTANT'}
                     </p>
-
                     <p className="mb-1 font-semibold text-white text-lg">Phone Numbers:</p>
                     <ul className="list-disc list-inside text-white text-base mb-3 max-h-[90px] overflow-auto">
                       {person === 'person1' ? (
@@ -76,7 +75,7 @@
                         </>
                       )}
                     </ul>
-                    <p className="mb-2 text-1xl text-white">
+                    <p className="lg:mb-2 text-1xl text-white">
                     Email: {person === 'person1' ? 
                       <a href="mailto:johannahmaebantiling2@gmail.com">johannahmaebantiling2@gmail.com</a> 
                       : 
@@ -85,7 +84,6 @@
                     <p className="mb-4 text-base text-white">
                       Address: {person === 'person1' ? '17 Vatican City Dr, BF Resort Village, Talon 2, Las Piñas City' : '17 Vatican City Dr, BF Resort Village, Talon 2, Las Piñas City'}
                     </p>
-
                     <p className="font-semibold text-white mb-1 text-lg ml-14">Scan Me:</p>
                     <div className="flex gap-6 mb-1">
                       <img
@@ -99,12 +97,12 @@
                     </div>
                   </div>
                   {/* Right side: Rectangular Profile Image */}
-                  <div className="relative  w-74 h-100 flex-shrink-0 border-pink self-center rounded-lg ">
-                  <div className='absolute mt-4 top-14 -translate-y-2/11 -right-45 '>
+                  <div className="absolute lg:relative -right-1/4  lg:right-0 w-54 lg:w-74 h-100 flex-shrink-0 border-pink self-center rounded-lg ">
+                  <div className='relative  lg:absolute  mt-4 top-75 lg:mt-4  lg:top-14 -translate-y-1/2 lg:-translate-y-2/11  lg:-right-39 '>
                     <img
                       src={person === 'person1' ? '/maam.png' : '/siraljun.png'}
                       alt="Profile"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover "
                     />
                   </div>
                 </div>
