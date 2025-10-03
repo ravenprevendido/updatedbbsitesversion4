@@ -484,26 +484,44 @@ const handleMobileNavClick = (id: string) => {
             }, 200)
           }}
         >
-        <div className="ml-4 mt-2 space-y-2  bg-zinc-900 rounded p-6 w-[280px]">
-          {aboutList.map((text, idx) => (
+        <div className="ml-4 mt-2 space-y-2 bg-zinc-900 rounded p-6 w-[280px]">
+        {aboutList.map((label, idx) => {
+          const handleAboutNavigation = (label: string) => {
+            const routeMap: Record<string, string> = {
+              "About Us": "/about#about-us",
+              "Mission and Vission": "/about#mission-and-vision",
+              "Why Choose Burnbox Printing?": "#why-choose-burnbox",
+            };
+
+            const target = routeMap[label];
+            if (!target) return;
+
+            if (label === "Why Choose Burnbox Printing?") {
+              if (pathname === "/") {
+                const section = document.querySelector(target);
+                section?.scrollIntoView({ behavior: "smooth" });
+              } else {
+                router.push("/#why-choose-burnbox");
+              }
+            } else {
+              router.push(target);
+            }
+            setMobileMenuOpen(false);
+            setShowAboutTooltip(false);
+          };
+
+          return (
             <button
               key={idx}
               className="block text-sm text-left hover:text-pink transition"
-              onClick={() => {
-                const id = text.toLowerCase().replace(/\s+/g, '-');
-                const section = document.getElementById(id);
-                if (section) {
-                  section.scrollIntoView({ behavior: 'smooth' });
-                }
-                setMobileMenuOpen(false);
-                setShowAboutTooltip(false);
-              }}
+              onClick={() => handleAboutNavigation(label)}
             >
-              {text}
+              {label}
             </button>
-          ))}
-        </div>
-        </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
       )}
       </AnimatePresence>
       <AnimatePresence>

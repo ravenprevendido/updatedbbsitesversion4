@@ -5,8 +5,6 @@ import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 
-
-
 interface AboutTooltipProps {
   aboutus: string[];
 }
@@ -37,9 +35,6 @@ const AboutTooltip: React.FC<AboutTooltipProps> = ({ aboutus }) => {
       router.push(target); // About Us and Mission navigate normally
     }
   };
-
-
-  
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
