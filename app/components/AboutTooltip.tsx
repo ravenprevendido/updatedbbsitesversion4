@@ -37,6 +37,8 @@ const AboutTooltip: React.FC<AboutTooltipProps> = ({ aboutus }) => {
       router.push(target); // About Us and Mission navigate normally
     }
   };
+
+
   
   return (
     <motion.div

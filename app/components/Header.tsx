@@ -15,6 +15,7 @@ import TooltipServices from './TooltipServices';
 import AboutTooltip from './AboutTooltip';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useHeaderContext } from '../context/HeaderContext';
+import { clear } from 'console';
 // header props
 
 const Header: React.FC = () => {
@@ -135,6 +136,7 @@ const router = useRouter()
   const [isHoveringTooltip, setIsHoveringTooltip] = useState(false);
   const tooltipRef = useRef<HTMLDivElement | null>(null)
   const hideTooltipTimeout = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeout = useRef<NodeJS.Timeout | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   // ➕ Add this state
 
@@ -157,10 +159,8 @@ const router = useRouter()
       setIsMobile(window.innerWidth < 768);
     };
 
-
     handleResize();
     window.addEventListener('resize', handleResize);
-
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -240,6 +240,7 @@ const handleMobileNavClick = (id: string) => {
     }
     setIsHoveringTooltip(true);
     setShowAboutTooltip(true);  // Show tooltip when mouse is over it
+
   };
   // Handle mouse leave the Tooltip component
   const handleMouseLeaveTooltipAbout = () => {
@@ -432,26 +433,38 @@ const handleMobileNavClick = (id: string) => {
           } else if (isContact) {
             router.push('/contact#contact')
             setMobileMenuOpen(false)
-          } else {
-            handleMobileNavClick(item.toLowerCase());
-            setShowAboutTooltip(false);
-            setShowServicesTooltip(false);
-          }
+          } 
+          
         }}
           className="flex items-center gap-2 text-left hover:text-pink transition"
         >
-          
-          <span>{item}</span>
-          {(isAbout || isServices) && (
-            <HiChevronDown
-              className={`
-                text-pink-500 transition-transform duration-300 
-                ${((isAbout && showAboutTooltip) || (isServices && showServicesTooltip)) ? 'rotate-180' : ''}
-              `}
-              size={18}
-            />
-          )}
+         {item}
         </button>
+         {(isAbout || isServices) && (
+        <button
+          onClick={() => {
+            if (isAbout) {
+              setShowAboutTooltip(prev => !prev);
+              setShowServicesTooltip(false);
+            } else if (isServices) {
+              setShowServicesTooltip(prev => !prev);
+              setShowAboutTooltip(false);
+            }
+          }}
+          onMouseEnter={() => {
+            if (isAbout) setShowAboutTooltip(true);
+            if (isServices) setShowServicesTooltip(true);
+          }}
+        
+          className="flex items-center"
+        >
+          <HiChevronDown
+            className={`text-pink-500 transition-transform duration-300 
+              ${((isAbout && showAboutTooltip) || (isServices && showServicesTooltip)) ? 'rotate-180' : ''}`}
+            size={18}
+          />
+        </button>
+          )}
       </div>
       {/* Submenu */}   
       <AnimatePresence>
@@ -462,6 +475,14 @@ const handleMobileNavClick = (id: string) => {
           animate={{opacity: 1, scale: 1, y : 0}}
           exit={{opacity: 0, scale: 0.8, transition: { duration: 0.2 }}}
           transition={{duration: 0.2, ease: 'easeInOut'}}
+          onMouseEnter={() => {
+            if(hideTimeout.current) clearTimeout(hideTimeout.current);
+          }}
+          onMouseLeave={() => {
+            hideTimeout.current = setTimeout(() => {
+              setShowAboutTooltip(false);
+            }, 200)
+          }}
         >
         <div className="ml-4 mt-2 space-y-2  bg-zinc-900 rounded p-6 w-[280px]">
           {aboutList.map((text, idx) => (
@@ -493,6 +514,14 @@ const handleMobileNavClick = (id: string) => {
           animate={{opacity: 1, scale: 1, y : 0}}
           exit={{opacity: 0, scale: 0.8, transition: { duration: 0.2 }}}
           transition={{duration: 0.2, ease: 'easeInOut'}}
+          onMouseEnter={() => {
+            if(hideTimeout.current) clearTimeout(hideTimeout.current);
+          }}
+          onMouseLeave={() => {
+            hideTimeout.current = setTimeout(() => {
+              setShowServicesTooltip(false);
+            }, 200)
+          }}
         >
         <div className="ml-4 mt-2 space-y-2 bg-zinc-900 rounded p-6 w-[280px]">
           {servicesList.map((service, idx) => (
@@ -517,10 +546,8 @@ const handleMobileNavClick = (id: string) => {
       )}
       </AnimatePresence>
     </div>
-    
   );
 })}
-
     <div className='block w-full text-left animate-fadeInUp' style={{ animationDelay: '0.4s' }}>
        <div className='flex items-center gap-2 w-full'>
        {/* <button
