@@ -1,25 +1,34 @@
 "use client";
 
 import { IntroductionVideoProps } from '@/types';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { HiOutlineX } from 'react-icons/hi'
 import { HiVideoCamera } from 'react-icons/hi2'
 
 const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [skipTimer, setSkipTimer] = useState(5);
-  const [enableExit, setEnableExit] = useState(false);
+  const [canSkip, setCanSkip] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (skipTimer > 0) {
-        setSkipTimer((prev: number) => prev - 1);
-      }
-      if (skipTimer === 1) {
-        setEnableExit(true);
-      }
+    const interval = setInterval(() => {
+      setSkipTimer((prev) => {
+        if(prev <= 1) {
+          clearInterval(interval);
+          setCanSkip(true);
+          return 0; 
+        }
+        return prev - 1;
+      });
     }, 1000);
-    return () => clearTimeout(timer);
-  }, [skipTimer]);
+
+    const video = videoRef.current;
+    if(video) {
+      video.play().catch((err) => console.log("Autoplay blocked:", err))
+    }
+    return () => clearInterval(interval);
+  }, [])
+
   return (
     <div className="h-full w-full z-[99] bg-black/40 backdrop-blur-md top-0 left-0 fixed flex items-center justify-center px-4">
       <div className="h-auto w-full sm:w-3/4 lg:w-1/2 bg-white rounded-2xl shadow-lg p-5 flex flex-col gap-4">
@@ -34,11 +43,11 @@ const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
             <button
               type="button"
               className={`text-lg p-1 rounded-full transition ${
-                enableExit
+                canSkip
                   ? 'border border-rose-500 text-rose-500 hover:bg-rose-100'
                   : 'border border-transparent bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
-              disabled={!enableExit}
+              disabled={!canSkip}
               onClick={() => isVideoVisible(false)}
             >
               <HiOutlineX />
@@ -49,14 +58,14 @@ const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
         {/* Video Placeholder */}
         <div className="h-48 sm:h-64 md:h-120 w-full bg-gray-900 rounded-md flex items-center justify-center text-6xl sm:text-7xl md:text-8xl">
         <video 
+        ref={videoRef}
         src="/videos/video.mp4"
         className='w-full h-full object-cover'
         autoPlay
-        controls
+        playsInline
         muted
-        >
-              
-        </video>
+        controls
+        />
         </div>
       </div>
     </div>

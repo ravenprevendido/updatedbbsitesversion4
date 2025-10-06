@@ -1,45 +1,53 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-//  Define the shape of the context
-type HeaderContextType = {
-  searchValue: string;
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-  selectedServiceFromHeader: string | null;
-  setSelectedServiceFromHeader:  (service: string | null) => void;
-};
+export default function IntroductionVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [skipTimer, setSkipTimer] = useState(5); // seconds
+  const [canSkip, setCanSkip] = useState(false);
 
-// Create the context
-const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
+  useEffect(() => {
+    // Start countdown timer
+    const interval = setInterval(() => {
+      setSkipTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setCanSkip(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
-// Provider component
-export const HeaderProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [selectedServiceFromHeader, setSelectedServiceFromHeader] = useState<
-    string | null
-  >(null);
+    // Auto-play when video is ready
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch((err) => console.log("Autoplay blocked:", err));
+    }
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <HeaderContext.Provider
-      value={{
-        searchValue,
-        setSearchValue,
-        selectedServiceFromHeader,
-        setSelectedServiceFromHeader,
-      }}
-    >
-      {children}
-    </HeaderContext.Provider>
+    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-4 w-[90%] max-w-3xl relative">
+        <p className="font-semibold text-lg mb-2">
+          Thank you for visiting us! Learn more about us by watching this video.
+        </p>
+        <video
+          ref={videoRef}
+          src="/videos/video.mp4"
+          className="w-full h-80 object-cover rounded-lg"
+          autoPlay
+          muted
+          playsInline
+        />
+        <div className="absolute top-3 right-5 text-gray-600 text-sm">
+          {canSkip
+            ? <button className="text-red-500 font-semibold">Skip ✕</button>
+            : `You can skip after ${skipTimer} seconds`}
+        </div>
+      </div>
+    </div>
   );
-};
-
-// 🎯 Hook to consume the context
-export const useHeaderContext = () => {
-  const context = useContext(HeaderContext);
-  if (!context) {
-    throw new Error("useHeaderContext must be used within a HeaderProvider");
-  }
-  return context;
-};
+}
