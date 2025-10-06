@@ -51,6 +51,7 @@ const router = useRouter()
   }
  };
 
+
  const searchParams = useSearchParams();
  useEffect(() => {
   const scrollTo = searchParams?.get('scrollTo');
@@ -126,6 +127,8 @@ const router = useRouter()
     name: "Other services.", nestedTooltip: ["Receipt types", "Forms customization", "Bulk orders"],
  },
 ];
+
+
   const buttons = ['wallmural', 'labelsticker', 'photocanvas', 'pvclanyard']
   const [showToolTip, setToolTip] = useState(false)
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -153,6 +156,7 @@ const router = useRouter()
     }
   }
 
+
   useEffect(() => {
     // detect 
     const handleResize = () =>{
@@ -174,7 +178,6 @@ const router = useRouter()
   const handleClickTooltipServices = () => {
     setShowServicesTooltip(!showServicesTooltip)
   }
-
 
   useEffect(() => {
     if(searchValue) {
@@ -509,7 +512,6 @@ const handleMobileNavClick = (id: string) => {
             setMobileMenuOpen(false);
             setShowAboutTooltip(false);
           };
-
           return (
             <button
               key={idx}

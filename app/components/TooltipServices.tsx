@@ -32,7 +32,6 @@ const TooltipServices: React.FC<TooltipServicesProps> = ({
             onClick={() => onServiceClick?.(service.name)}  
           >
             {service.name}
-
             {/* Nested tooltip */}
             {hoveredIndex === index && service.nestedTooltip && (
               <motion.div
@@ -60,5 +59,4 @@ const TooltipServices: React.FC<TooltipServicesProps> = ({
     </motion.div>
   );
 };
-
 export default TooltipServices;

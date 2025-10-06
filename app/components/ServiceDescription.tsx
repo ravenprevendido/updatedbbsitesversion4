@@ -43,12 +43,10 @@ const ServiceDescription: React.FC<Props> = ({ image, title, description, featur
     setSelectedTitle(label);
   };
 
-
   const scrollRef = useRef<HTMLDivElement>(null);
   let isDown = false;
   let startX: number;
   let scrollLeft: number;
-
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
@@ -76,7 +74,6 @@ const ServiceDescription: React.FC<Props> = ({ image, title, description, featur
   const handleContactSelect = (contact: Contact) => {
     setSelectedContact(contact)
   }
-
   const openModal = () => {
     setIsModalOpen(true);
   };

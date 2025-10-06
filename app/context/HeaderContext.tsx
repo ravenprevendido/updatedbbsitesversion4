@@ -21,6 +21,7 @@ export const HeaderProvider: React.FC<{ children: React.ReactNode }> = ({
     string | null
   >(null);
 
+
   return (
     <HeaderContext.Provider
       value={{
@@ -35,7 +36,7 @@ export const HeaderProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-// 🎯 Hook to consume the context
+// Hook to consume the context
 export const useHeaderContext = () => {
   const context = useContext(HeaderContext);
   if (!context) {

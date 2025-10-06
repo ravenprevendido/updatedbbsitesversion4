@@ -47,8 +47,16 @@ const IntroductionVideo = ({ isVideoVisible }: IntroductionVideoProps) => {
         </div>
 
         {/* Video Placeholder */}
-        <div className="h-48 sm:h-64 md:h-80 w-full bg-gray-200 rounded-md flex items-center justify-center text-6xl sm:text-7xl md:text-8xl text-gray-500">
-          <HiVideoCamera />
+        <div className="h-48 sm:h-64 md:h-120 w-full bg-gray-900 rounded-md flex items-center justify-center text-6xl sm:text-7xl md:text-8xl">
+        <video 
+        src="/videos/video.mp4"
+        className='w-full h-full object-cover'
+        autoPlay
+        controls
+        muted
+        >
+              
+        </video>
         </div>
       </div>
     </div>

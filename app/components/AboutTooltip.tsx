@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
-
 interface AboutTooltipProps {
   aboutus: string[];
 }
@@ -19,7 +18,6 @@ const AboutTooltip: React.FC<AboutTooltipProps> = ({ aboutus }) => {
       'Mission and Vission': '/about#mission-and-vision',
       'Why Choose Burnbox Printing?': '#why-choose-burnbox',
     };
-
     const target = routeMap[label];
     if (!target) return;
     if (label === 'Why Choose Burnbox Printing?') {
