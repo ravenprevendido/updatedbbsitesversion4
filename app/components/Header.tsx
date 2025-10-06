@@ -75,59 +75,89 @@ const router = useRouter()
     'contact'
   ]);
 
+    
   const aboutList = ['About Us', 'Mission and Vission', 'Why Choose Burnbox Printing?'];
   
   const servicesList  = [
-  {
+    {
     id: 1,
-    name: "Offset Printing / Forms & reciepts",
+    name: "Digital & Offset Printing"
+    },
+  {
+    id: 2,
+    name: "Forms & reciepts",
   },
   { 
-    id: 2,
-    name: "Corporate Giveaways" 
+    id: 3,
+    name: "Panaflex-Signage" 
   },
   {
-    id: 3,
+    id: 4,
     name: "Large format Services" 
   },
   { 
-    id: 4,
-    name: "Stickers & Labels" 
-  },
-  { 
     id: 5,
-    name: "Signage" 
+    name: "Sticker & Labels" 
   },
   { 
     id: 6,
-    name: "Marketing Collaterals" 
+    name: "Acrylic Build-up" 
   },
   { 
     id: 7,
-    name: "Wall Mural" 
+    name: "Standee Signage" 
   },
   { 
     id: 8,
-    name: "Glass Frosted Sticker" 
+    name: "Wall Mural" 
   },
   { 
     id: 9,
-    name: "Transit ads" 
+    name: "Glass Frosted Sticker" 
   },
   { 
     id: 10,
-    name: "Graphic Design" 
+    name: "Sticker On Sintra" 
   },
   { 
     id: 11,
-    name: "Logo design" 
+    name: "Graphic Design" 
   },
   { 
     id: 12,
-    name: "Other services.", nestedTooltip: ["Receipt types", "Forms customization", "Bulk orders"],
+    name: "Logo design" 
+  },
+  
+ { 
+    id: 14,
+    name: "Flyer Design" 
+  },
+ 
+  // { 
+  //   id: 16,
+  //   name: "X-Banner & Portable Booth" 
+  // },
+ 
+  // { 
+  //   id: 17,
+  //   name: "Brochures / Company Profile" 
+  // },
+ 
+    // { 
+  //   id: 18,
+  //   name: "Brochures / Company Profile" 
+  // },
+
+
+  
+  { 
+    id: 13,
+    name: "Other services.", 
+    nestedTooltip: ["Receipt types", "Forms customization", "Bulk orders", 
+    ],
+    
  },
 ];
-
 
   const buttons = ['wallmural', 'labelsticker', 'photocanvas', 'pvclanyard']
   const [showToolTip, setToolTip] = useState(false)
@@ -228,6 +258,7 @@ const handleMobileNavClick = (id: string) => {
     setIsHoveringTooltip(true);
     setShowServicesTooltip(true);  // Show tooltip when mouse is over it
   };
+
 
   // Handle mouse leave the Tooltip component
   const handleMouseLeaveTooltip = () => {
@@ -401,7 +432,6 @@ const handleMobileNavClick = (id: string) => {
         
         </div>
           )}
-
       </div>
           {/* right side */}
         <div className='hidden md:flex ml-4'>

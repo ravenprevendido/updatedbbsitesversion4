@@ -19,7 +19,7 @@ type Props = {
 const ImageCard: React.FC<Props> = ({ frontImg, hoverImg, title, description, features, relatedImages, isHovered: isHoveredProp = false, onClick }) => {
   const [isHovered, setIsHovered] = useState(false)
   const showHover = isHovered || isHoveredProp;
-  
+
   return (
     <div 
       onClick={() => onClick(hoverImg, title, description, features, relatedImages)} 
@@ -27,15 +27,14 @@ const ImageCard: React.FC<Props> = ({ frontImg, hoverImg, title, description, fe
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
    >
-    <div className='w-full transition-all duration-300 ease-in-out'>
-       
+    <div className='w-full transition-all duration-300 ease-in-out'> 
       <Image
         height={500}
         width={500}
         alt='Front image'
         src={isHovered ? hoverImg : frontImg}
         layout="responsive"
-        className='w-full h-full object-contain   transition-opacity duration-300 ease-in-out'
+        className='w-full  object-contain  aspect-square   transition-opacity duration-300 ease-in-out'
         draggable={false}
       />
       </div>
@@ -50,8 +49,6 @@ const ImageCard: React.FC<Props> = ({ frontImg, hoverImg, title, description, fe
     </div>
   )
 }
-
-
 export default ImageCard
 
 

@@ -15,12 +15,32 @@ type Props = {
 }
 
 const cards = [
+
+
+  
   {
     id: '1',
-    title: 'Offset Printing / Forms & reciepts',
+    title: 'Digital & Offset Printing',
+    frontImg: '/BOOK.png',
+    hoverImg: '/offset.png',
+    description: 'Digital and offset printing are two methods of producing printed materials: digital printing involves sending digital files directly to the printer without the need for plates, while offset printing is a traditional technique that uses plates to transfer ink onto a rubber blanket, then onto the printing surface.',
+    features: ['High-quality paper', 'Custom designs', 'Quick turnaround'],
+    relatedImages: [
+      {src: '/largformatpicture/xbanner.png', label: 'Large xbanner'},
+      {src: '/largformatimg.webp', label: 'Large Format'},
+      {src: '/largformatpicture/panaflex.png.png', label: 'Large Banner'},
+      {src: '/largformatpicture/tarpaulin.png', label: 'Large Banner'},
+      {src: '/largformatpicture/pullupbanner.png', label: 'Large Banner'}
+      
+    ]
+  },
+
+  {
+    id: '2',
+    title: 'Forms & reciepts',
     frontImg: '/BOOK.png',
     hoverImg: '/offsetprinting.png',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    description: 'Our Form & Receipt Printing Service is designed to streamline your documentation process, ensuring accuracy, consistency, and professionalism every step of the way.',
     features: ['High-quality paper', 'Custom designs', 'Quick turnaround'],
     relatedImages: [
       {src: '/largformatpicture/xbanner.png', label: 'Large xbanner'},
@@ -33,11 +53,11 @@ const cards = [
   },
   
   {
-    id: '2',
-    title: 'Corporate Giveaways',
+    id: '3',
+    title: 'Panaflex-Signage',
     frontImg: '/BOOK.png',
-    hoverImg: '/boxclothing.png',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    hoverImg: '/panaflex.png',
+    description: 'A transluscent canvas made with special substances that permit light to pass through it.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
       {src: '/boxclothing/image1.png', label: 'design Tshirt'},
@@ -49,11 +69,11 @@ const cards = [
   },
 
   {
-    id: '3',
+    id: '4',
     title: 'Large Format Services',
     frontImg: '/BOOK.png',
-    hoverImg: '/lgformat.png',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    hoverImg: '/largeformat.png',
+    description: 'Large format printing on different media such as Vinyl sticker, Photopaper, Duratrans ( Back-Litfilm ) , Panaflex and tarpaulins.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
       {src: '/brandstickers/image1.png', label: 'label stickers1'},
@@ -64,11 +84,11 @@ const cards = [
   },
 
   {
-    id: '4',
+    id: '5',
     title: 'Sticker & Labels',
     frontImg: '/BOOK.png',
-    hoverImg: '/callingcards.png',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    hoverImg: '/sticker.png',
+    description: 'Label Stickers are indispensable tools that offer convenience, organization, customization, and versatility for a wide range of personal, professional, and creative applications.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
       {src: '/callingcards/image1.png', label: 'calling cards1'},
@@ -79,10 +99,10 @@ const cards = [
     ]
   },
   {
-    id: '5',
-    title: 'Signage',
+    id: '6',
+    title: 'Acrylic Build-up',
     frontImg: '/BOOK.png',
-    hoverImg: '/corporategiveaways.png',
+    hoverImg: '/signage.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
@@ -93,12 +113,16 @@ const cards = [
       {src: '/giveaways/image5.png', label: 'giveaways design5'}
     ]
   },
+
+
+
+
   {
-    id: '6',
-    title: 'Marketing Collaterals',
+    id: '7',
+    title: 'Standee Signage',
     frontImg: '/BOOK.png',
-    hoverImg: '/decalstickers.png',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    hoverImg: '/standee.png',
+    description: 'We offer a range of innovative and eye-catching standee designs to help you effectively communicate your message, promote your brand, and enhance your visibility at events, exhibitions, trade shows, retail spaces, and more.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
       {src: '/BOOK.png', label: 'sample1'},
@@ -110,10 +134,10 @@ const cards = [
   },
 
   {
-    id: '7',
+    id: '8',
     title: 'Wall Mural',
     frontImg: '/BOOK.png',
-    hoverImg: '/cardsinvitation.png',
+    hoverImg: '/wallmural.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
@@ -126,11 +150,11 @@ const cards = [
   },
 
   {
-    id: '8',
+    id: '9',
     title: 'Glass Frosted Sticker',
     frontImg: '/BOOK.png',
     hoverImg: '/glassfrosted.png',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    description: 'Frosted glass stickers provide privacy, aesthetics, and branding opportunities for windows, glass partitions, doors, and more, creating a stylish and professional atmosphere in any environment.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
       {src: '/idlanyard/image1.png', label: 'idlanyard design1'},
@@ -141,10 +165,10 @@ const cards = [
     ]
   },
   {
-    id: '9',
-    title: 'Transit Ads',
+    id: '10',
+    title: 'Sticker On Sintra',
     frontImg: '/BOOK.png',
-    hoverImg: '/marketingcollaterals.png',
+    hoverImg: '/sintra.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
@@ -157,10 +181,154 @@ const cards = [
     ]
   },
   {
-    id: '10',
+    id: '11',
     title: 'Graphic design',
     frontImg: '/BOOK.png',
-    hoverImg: '/wallmural.png',
+    hoverImg: '/graphicdesign.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+  {
+    id: '14',
+    title: 'Flyer Design',
+    frontImg: '/BOOK.png',
+    hoverImg: '/flyer.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+  {
+    id: '15',
+    title: 'Logo Design',
+    frontImg: '/BOOK.png',
+    hoverImg: '/logo.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+  {
+    id: '16',
+    title: 'X-Banner & Portable Booth',
+    frontImg: '/BOOK.png',
+    hoverImg: '/xbanner.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+
+   {
+    id: '17',
+    title: 'Brochures / Company Profile',
+    frontImg: '/BOOK.png',
+    hoverImg: '/brochure.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+
+
+  
+   {
+    id: '18',
+    title: 'Photo Canvas',
+    frontImg: '/BOOK.png',
+    hoverImg: '/brochure.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+
+   {
+    id: '19',
+    title: 'Photo Canvas',
+    frontImg: '/BOOK.png',
+    hoverImg: '/photocanvas.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+
+  {
+    id: '20',
+    title: 'Signage & Wall Mural Installation',
+    frontImg: '/BOOK.png',
+    hoverImg: '/installation.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+
+    {
+    id: '21',
+    title: 'Backlit FIlm',
+    frontImg: '/BOOK.png',
+    hoverImg: '/backlitfilm.png',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
+    features: ['Bold designs', 'Brand-focused', 'Customizable options'],
+    relatedImages: [
+      {src: '/wallmural/image1.png', label: 'wallmural sample1'},
+      {src: '/wallmural/image2.png', label: 'wallmural sample2'},
+      {src: '/wallmural/image3.png', label: 'wallmural sample3'},
+      {src: '/wallmural/image4.png', label: 'wallmural sample4'},
+      {src: '/wallmural/image5.png', label: 'wallmural sample5'},
+    ]
+  },
+
+  
+    {
+    id: '22',
+    title: 'Vehicle Wrap',
+    frontImg: '/BOOK.png',
+    hoverImg: '/vehicle.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
@@ -172,6 +340,8 @@ const cards = [
     ]
   }
 ]
+
+
 
 
 const ServicesInfo: React.FC<Props> = ({
@@ -237,12 +407,10 @@ useEffect(() => {
         matchedCard.relatedImages
       );
     }
-
     //  clear context after opening so you can trigger again
     setSelectedServiceFromHeader(null);
   }
 }, [selectedServiceFromHeader]);
-
   // Filter cards
   const filterCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -287,7 +455,6 @@ useEffect(() => {
           </p>
         )}
       </div>
-
       {/* Modal */}
       {selectedImage && (
         <div
