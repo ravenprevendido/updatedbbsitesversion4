@@ -19,6 +19,7 @@ type Props = {
 const ImageCard: React.FC<Props> = ({ frontImg, hoverImg, title, description, features, relatedImages, isHovered: isHoveredProp = false, onClick }) => {
   const [isHovered, setIsHovered] = useState(false)
   const showHover = isHovered || isHoveredProp;
+  
   return (
     <div 
       onClick={() => onClick(hoverImg, title, description, features, relatedImages)} 

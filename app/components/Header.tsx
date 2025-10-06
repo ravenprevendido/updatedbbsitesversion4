@@ -28,7 +28,7 @@ const handleTooltipServiceClick = (serviceName: string) => {
   const encoded = encodeURIComponent(serviceName);
 
   if (pathname === "/services") {
-    // ✅ direct set to context (ServicesInfo will pick it up)
+    
     setSelectedServiceFromHeader(serviceName);
   } else {
     router.push(`/services?selected=${encoded}`);
@@ -375,8 +375,33 @@ const handleMobileNavClick = (id: string) => {
             >
               <HiX className='text-pink-500'/>
            </button>
+
+         
+            <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="absolute mt-3 w-65 bg-zinc-900 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3"
+          >
+            <Image
+              src="/bblogo.png"
+              alt="Burnbox Logo"
+              width={50}
+              height={40}
+              className="object-contain"
+            />
+            <div className="text-center text-sm">
+              <p className="text-white font-semibold">Looking for something?</p>
+              <p className="text-xs text-gray-400">
+                Search Burnbox Printing for posts, photos and other visible activity.
+              </p>
+            </div>
+          </motion.div>
+        
         </div>
           )}
+
       </div>
           {/* right side */}
         <div className='hidden md:flex ml-4'>
@@ -397,7 +422,7 @@ const handleMobileNavClick = (id: string) => {
       </div>
       {isMobileMenuOpen && (
   <div
-    className={`absolute top-20 left-0 w-full bg-black text-white px-7 space-y-4 z-40 transition-[max-height,opacity,transform] duration-300 ease-in-out overflow-hidden max-h-screen opacity-100`}
+    className={`absolute top-full left-0 w-full bg-black text-white px-7 space-y-4 transition-[max-height,opacity,transform] duration-300 ease-in-out max-h-screen opacity-100`}
   >
  {['Home', 'About', 'Services', 'Contact'].map((item, index) => {
   const isAbout = item === 'About';
@@ -592,7 +617,7 @@ const handleMobileNavClick = (id: string) => {
           <HiChevronDown className={`${showMobileSubmenu ? 'rotate-180' : ''} hover:text-pink`} />
         </button> */}
       {showMobileSubmenu && (
-        <div className='ml-4 mt-3 space-y-2'>
+        <div className='ml-4 mt-3 space-y-2 '>
           {buttons.map((item, index) => (
             <button
               key={index}
@@ -610,13 +635,15 @@ const handleMobileNavClick = (id: string) => {
             >
               {item}
             </button>
+            
           ))}
         </div>
       )}
     </div>
+    
    <div
-  className='flex items-center gap-4 mt-6 py-4 animate-fadeInUp transition-all duration-300'
-  style={{ animationDelay: '0.7s' }}
+  className='relative flex items-center gap-4 mt-6 py-4 animate-fadeInUp transition-all duration-300 overflow-visible z-[9999]'
+  style={{ animationDelay: '0.7s'}}
 >
   {/* Cart Icon */}
   <div className='p-2 rounded-full bg-pink hover:scale-110 transition'>
@@ -632,6 +659,9 @@ const handleMobileNavClick = (id: string) => {
       className='min-w-[120px] max-w-[200px] bg-transparent border border-pink-300 text-white px-4 py-2 rounded-md focus:outline-none placeholder:text-gray-400 transition-all duration-300'
     />
   )}
+
+
+
  <button
     onClick={() => {
       setIsMobileSearchActive(prev => !prev);
@@ -639,6 +669,7 @@ const handleMobileNavClick = (id: string) => {
     }}
     className='relative w-8 h-8 transition-all duration-500 ease-in-out transform hover:rotate-90'
   >
+    
     {/* Search Icon */}
     <HiOutlineSearch
       className={`
@@ -646,6 +677,8 @@ const handleMobileNavClick = (id: string) => {
         ${isMobileSearchActive ? 'opacity-0 scale-0 rotate-45' : 'opacity-100 scale-100 rotate-0'}
       `}
     />
+
+
     {/* X Icon */}
     <HiX
       className={`
@@ -653,11 +686,31 @@ const handleMobileNavClick = (id: string) => {
         ${isMobileSearchActive ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-0 rotate-45'}
       `}
     />
+
+
   </button>
+      {isMobileSearchActive && (
+    <div className="absolute bottom-[-150px] left-12 w-52 bg-zinc-900/95 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3 z-[10000] backdrop-blur-md">
+      <img
+        src="/bblogo.png"
+        alt="Burnbox Logo"
+        className="h-12 object-contain"
+        
+      />
+      <div className="text-center text-sm">
+        <p className="text-white font-semibold">Looking for something?</p>
+        <p className="text-xs text-gray-400">
+          Search Burnbox Printing for posts, photos, and other visible activity.
+        </p>
+      </div>
+    </div>
+  )}
 </div>
   </div>
 )}
     </div>
   )
 }
+
+
 export default Header

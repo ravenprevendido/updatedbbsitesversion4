@@ -1,53 +1,69 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
+{isSearchActive ? (
+  <div 
+    className={`
+      ${isSearchActive
+        ?  'opacity-100 translae-y-0 scale-100'
+        :  'opacity-0 -translate-2 scale-95 pointer-events-none absolute'
+      }
+      `}
+  >
+    <input  
+      type='text'
+      value={searchValue}
+      onChange={(e) => setSearchValue(e.target.value)}
+      placeholder='Search...'
+      className='bg-transparent border border-pink-300 text-white px-4 py-2 rounded-md focus:outline-none transition-all duration-300 w-64 placeholder:text-gray-500'
+    />
+    <button
+      type='button'
+      className='text-2xl p-2 mr-3'
+      onClick={() => {
+        setIsSearchActive(false);
+        setSearchValue('');
+      }}
+    >
+      <HiX className='text-pink-500'/>
+    </button>
+  </div>
+) : (
 
-export default function IntroductionVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [skipTimer, setSkipTimer] = useState(5); // seconds
-  const [canSkip, setCanSkip] = useState(false);
 
-  useEffect(() => {
-    // Start countdown timer
-    const interval = setInterval(() => {
-      setSkipTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          setCanSkip(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
 
-    // Auto-play when video is ready
-    const video = videoRef.current;
-    if (video) {
-      video.play().catch((err) => console.log("Autoplay blocked:", err));
-    }
 
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-4 w-[90%] max-w-3xl relative">
-        <p className="font-semibold text-lg mb-2">
-          Thank you for visiting us! Learn more about us by watching this video.
-        </p>
-        <video
-          ref={videoRef}
-          src="/videos/video.mp4"
-          className="w-full h-80 object-cover rounded-lg"
-          autoPlay
-          muted
-          playsInline
-        />
-        <div className="absolute top-3 right-5 text-gray-600 text-sm">
-          {canSkip
-            ? <button className="text-red-500 font-semibold">Skip ✕</button>
-            : `You can skip after ${skipTimer} seconds`}
-        </div>
-      </div>
+{/*  Search info box */}
+{searchValue.trim() === '' && (
+  <motion.div
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    transition={{ duration: 0.3 }}
+    className="absolute mt-3 w-80 bg-zinc-900 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3"
+  >
+    <Image
+      src="/burnboxlogo.png"
+      alt="Burnbox Logo"
+      width={40}
+      height={40}
+      className="object-contain"
+    />
+    <div className="text-center text-sm">
+      <p className="text-white font-semibold">Looking for something?</p>
+      <p className="text-xs text-gray-400">
+        Search Burnbox Printing for posts, photos and other visible activity.
+      </p>
     </div>
-  );
-}
+  </motion.div>
+)}
+
+
+
+
+<div 
+  className={`
+    relative
+    ${isSearchActive
+      ? 'opacity-100 translate-y-0 scale-100'
+      : 'opacity-0 -translate-2 scale-95 pointer-events-none absolute'
+    }
+  `}
+>

@@ -19,7 +19,7 @@ const cards = [
     id: '1',
     title: 'Offset Printing / Forms & reciepts',
     frontImg: '/BOOK.png',
-    hoverImg: '/largformatimg.webp',
+    hoverImg: '/offsetprinting.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['High-quality paper', 'Custom designs', 'Quick turnaround'],
     relatedImages: [
@@ -52,7 +52,7 @@ const cards = [
     id: '3',
     title: 'Large Format Services',
     frontImg: '/BOOK.png',
-    hoverImg: '/brandstickers.png',
+    hoverImg: '/lgformat.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
@@ -62,6 +62,7 @@ const cards = [
       {src: '/brandstickers/image2.png', label: 'label stickers4'}
     ]
   },
+
   {
     id: '4',
     title: 'Sticker & Labels',
@@ -128,7 +129,7 @@ const cards = [
     id: '8',
     title: 'Glass Frosted Sticker',
     frontImg: '/BOOK.png',
-    hoverImg: '/idlanyard.png',
+    hoverImg: '/glassfrosted.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium recusandae, vero vel molestias voluptatem nam et reprehenderit. Vero repellat ipsa voluptatum maxime commodi.',
     features: ['Bold designs', 'Brand-focused', 'Customizable options'],
     relatedImages: [
