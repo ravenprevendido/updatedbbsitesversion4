@@ -298,7 +298,7 @@ const ServicesProduct = () => {
                 exit={{opacity: 0}}
             >
             <div className=' fixed inset-0 pt-20  bg-black/70 flex items-center justify-center z-50 '>
-                <div className='bg-[#211F1F] h-[800px] px-4  md:px-6 text-white rounded-xl w-full lg:w-4/5  md:w-2/3  relative overflow-y-auto  lg:h-[90vh] '>
+                <div className='bg-[#211F1F] h-[600px] px-4  md:px-6 text-white rounded-xl w-full lg:w-4/5  md:w-2/3  relative overflow-y-auto  lg:h-[90vh] '>
                     <button 
                         onClick={() => setSelectedProduct(null)}
                     >
