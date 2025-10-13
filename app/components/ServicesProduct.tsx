@@ -298,7 +298,7 @@ const ServicesProduct = () => {
                 exit={{opacity: 0}}
             >
             <div className=' fixed inset-0 pt-20  bg-black/70 flex items-center justify-center z-50 '>
-                <div className='bg-[#211F1F] h-[650px] px-4  md:px-6 text-white rounded-xl w-full lg:w-4/5  md:w-2/3  relative overflow-y-auto  lg:h-[90vh] '>
+                <div className='bg-[#211F1F] h-full px-4  md:px-6 text-white rounded-xl w-full lg:w-4/5  md:w-2/3  relative overflow-y-auto  lg:h-[90vh] '>
                     <button 
                         onClick={() => setSelectedProduct(null)}
                     >
@@ -315,7 +315,6 @@ const ServicesProduct = () => {
                             <ProductImageSlider images={selectedProduct.image} name={''} />
                         </div>
                       </div>
-
                         {/* info */}    
                         <div className='cols-span-1 flex flex-col justify-start gap-4 w-[100%]  lg:pr-0  max-w-md mx-auto'>
                             <h2 className='text-2xl font-semibold mb-2 text-center md:text-left'>{selectedProduct.name}</h2>
