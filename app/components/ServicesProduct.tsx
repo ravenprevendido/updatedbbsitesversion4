@@ -298,7 +298,7 @@ const ServicesProduct = () => {
                 exit={{opacity: 0}}
             >
             <div className=' fixed inset-0 pt-20  bg-black/70 flex items-center justify-center z-50 '>
-                <div className='bg-[#211F1F] h-[600px] px-4  md:px-6 text-white rounded-xl w-full lg:w-4/5  md:w-2/3  relative overflow-y-auto  lg:h-[90vh] '>
+                <div className='bg-[#211F1F] h-[650px] px-4  md:px-6 text-white rounded-xl w-full lg:w-4/5  md:w-2/3  relative overflow-y-auto  lg:h-[90vh] '>
                     <button 
                         onClick={() => setSelectedProduct(null)}
                     >
@@ -455,7 +455,7 @@ const ServicesProduct = () => {
                                   related: getRandomRelated(item.id),
                                 })
                               }
-                              className="relative w-58 h-50 bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden cursor-pointer group hover:scale-[1.03] transition-all duration-300"
+                              className="relative w-full  lg:w-58 h-50 bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden cursor-pointer group hover:scale-[1.03] transition-all duration-300"
                             >
                               <Image
                                 src={item.image[0]}
