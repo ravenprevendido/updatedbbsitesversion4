@@ -9,9 +9,6 @@ import Footer from "./components/Footer";
 import { useSearchParams } from "next/navigation";
 import WhyChooseBurnboxPage from "./components/WhyChooseBurnBox";
 import GalleryPhotos from "./components/GalleryPhotos";
-// const Maps = dynamic(() => import('./components/Maps'), {
-//   ssr: false
-// });
 
 export default function Home() {
   const [videoVisible, isVideoVisible] = useState(true);

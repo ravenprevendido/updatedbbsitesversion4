@@ -46,6 +46,7 @@ const GalleryPhotos: React.FC = () => {
     }
   };
 
+  
   useEffect(() => {
     loadPosts();
     const interval = setInterval(loadPosts, 60000);

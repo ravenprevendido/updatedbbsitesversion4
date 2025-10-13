@@ -148,8 +148,6 @@ const router = useRouter()
   //   name: "Brochures / Company Profile" 
   // },
 
-
-  
   { 
     id: 13,
     name: "Other services.", 
@@ -171,7 +169,7 @@ const router = useRouter()
   const hideTooltipTimeout = useRef<NodeJS.Timeout | null>(null);
   const hideTimeout = useRef<NodeJS.Timeout | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  // ➕ Add this state
+ 
 
   const filteredList = list.filter((item) => {
     return item.toLowerCase().includes(searchValue.toLowerCase())
@@ -185,6 +183,7 @@ const router = useRouter()
       }
     }
   }
+
 
 
   useEffect(() => {
@@ -201,13 +200,6 @@ const router = useRouter()
     }
   }, [])
 
-  const handleClickTooltipAbout = () => {
-    setShowAboutTooltip(!showAboutTooltip);
-  }
-
-  const handleClickTooltipServices = () => {
-    setShowServicesTooltip(!showServicesTooltip)
-  }
 
   useEffect(() => {
     if(searchValue) {
@@ -281,7 +273,7 @@ const handleMobileNavClick = (id: string) => {
     setIsHoveringTooltip(false);  // Set flag to false when leaving the tooltip
     hideTooltipTimeout.current = setTimeout(() => {
       setShowAboutTooltip(false);  // Hide tooltip after delay
-    }, 200);  // Adjust delay if necessary
+    }, 200); 
   };
   return (
     <div className='h-20 w-full flex items-center justify-between px-5 py-3 text-white font-extralight text-lg z-100 bg-black fixed'>
@@ -334,7 +326,7 @@ const handleMobileNavClick = (id: string) => {
         onMouseLeave={handleMouseLeaveServices}
         >
         <a href="/services"><button
-          onClick={() => handleNavClick("services")}
+          onClick={() => handleNavClick("product")}
           type="button"
           className='px-5 h-full flex gap-2 items-center hover:text-pink transition ease-in duration-200'
         >
@@ -351,18 +343,7 @@ const handleMobileNavClick = (id: string) => {
           </div>
         )}
       </span>
-        {/* <span className='relative'>
-          <a href="#gallery" ><button
-            type="button"
-            className='pl-5 pr-3 h-full flex gap-2 items-center  hover:text-pink transition ease-in duration-200'
-            onClick={() => setToolTip(!showToolTip)}
-          >
-            Gallery
-
-          </button>
-          </a>
-          {showToolTip && <ToolTip buttons={buttons} setToolTip={setToolTip} />}
-        </span> */}
+        
          <a href="/contact">
         <button
           onClick={() => handleNavClick("contact")}
@@ -406,8 +387,7 @@ const handleMobileNavClick = (id: string) => {
             >
               <HiX className='text-pink-500'/>
            </button>
-
-         
+          {searchValue.trim() === ''? (
             <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -429,7 +409,20 @@ const handleMobileNavClick = (id: string) => {
               </p>
             </div>
           </motion.div>
-        
+          ) : (
+            <>
+              {searchValue.length < 2 ? (
+                <div className='flex flex-col items-center'>
+                  <div></div>
+                  <p>Searching</p>
+                </div>
+              ) : (
+                <>
+                  <div></div>
+                </>
+              )}
+            </>
+          )}
         </div>
           )}
       </div>
@@ -624,28 +617,8 @@ const handleMobileNavClick = (id: string) => {
   );
 })}
     <div className='block w-full text-left animate-fadeInUp' style={{ animationDelay: '0.4s' }}>
-       <div className='flex items-center gap-2 w-full'>
-       {/* <button
-          onClick={() => {
-            const section = document.getElementById('gallery');
-            if (section) {
-              section.scrollIntoView({ behavior: 'smooth' });
-            }
-            setMobileMenuOpen(false); 
-            setShowMobileSubmenu(false); 
-          }}
-          className='relative flex-1 w-full text-left hover:text-pink transition'
-        >
-          Gallery
-        </button> */}
-      </div>
-        {/* 📌 Chevron — Toggles submenu */}
-        {/* <button
-          onClick={() => setShowMobileSubmenu(!showMobileSubmenu)}
-          className='absolute flex-shrink-0 top-2 ml-15 text-1xl text-white hover:text-pink transition-transform duration-300'
-        >
-          <HiChevronDown className={`${showMobileSubmenu ? 'rotate-180' : ''} hover:text-pink`} />
-        </button> */}
+       
+
       {showMobileSubmenu && (
         <div className='ml-4 mt-3 space-y-2 '>
           {buttons.map((item, index) => (
@@ -685,12 +658,11 @@ const handleMobileNavClick = (id: string) => {
       type='text'
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
+    
       placeholder='Search...'
       className='min-w-[120px] max-w-[200px] bg-transparent border border-pink-300 text-white px-4 py-2 rounded-md focus:outline-none placeholder:text-gray-400 transition-all duration-300'
     />
   )}
-
-
 
  <button
     onClick={() => {
@@ -707,8 +679,6 @@ const handleMobileNavClick = (id: string) => {
         ${isMobileSearchActive ? 'opacity-0 scale-0 rotate-45' : 'opacity-100 scale-100 rotate-0'}
       `}
     />
-
-
     {/* X Icon */}
     <HiX
       className={`
@@ -717,24 +687,79 @@ const handleMobileNavClick = (id: string) => {
       `}
     />
 
-
   </button>
-      {isMobileSearchActive && (
-    <div className="absolute bottom-[-150px] left-12 w-52 bg-zinc-900/95 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3 z-[10000] backdrop-blur-md">
-      <img
-        src="/bblogo.png"
-        alt="Burnbox Logo"
-        className="h-12 object-contain"
-        
-      />
-      <div className="text-center text-sm">
-        <p className="text-white font-semibold">Looking for something?</p>
-        <p className="text-xs text-gray-400">
-          Search Burnbox Printing for posts, photos, and other visible activity.
-        </p>
-      </div>
-    </div>
-  )}
+     {isMobileSearchActive && (
+  <div className="absolute bottom-[-150px] left-12 w-52 bg-zinc-900/95 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3 z-[10000] backdrop-blur-md transition-all duration-300">
+    {searchValue.trim() === '' ? (
+      <>
+        <img
+          src="/bblogo.png"
+          alt="Burnbox Logo"
+          className="h-12 object-contain animate-fadeIn"
+        />
+        <div className="text-center text-sm animate-fadeIn">
+          <p className="text-white font-semibold">Looking for something?</p>
+          <p className="text-xs text-gray-400">
+            Search Burnbox Printing for posts, photos, and other visible activity.
+          </p>
+        </div>
+      </>
+    ) : (
+      <>
+        {searchValue.length < 2 ? (
+          <div className="flex flex-col items-center justify-center w-full py-4">
+            <div className="w-17 h-17 border-2 border-pink-400 border-t-transparent rounded-full animate-spin mb-2"></div>
+            <p className="text-xs text-gray-400">Searching...</p>
+          </div>
+        ) : (
+          <>
+            <div className="w-full flex flex-col gap-2">
+              {[
+                { name: 'Home', id: 'home' },
+                { name: 'About', id: 'about' },
+                { name: 'Services', id: 'services' },
+                { name: 'Contact', id: 'contact' },
+              ]
+                .filter((item) =>
+                  item.name.toLowerCase().includes(searchValue.toLowerCase())
+                )
+                .map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      const section = document.getElementById(item.id);
+                      if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        window.location.href = `/${item.id.toLowerCase()}`;
+                      }
+                      setIsMobileSearchActive(false);
+                    }}
+                    className="w-full sm:w-full px-3 py-13 rounded-md  hover:text-white transition-all duration-200 text-sm"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              {[
+                { name: 'Home', id: 'home' },
+                { name: 'About', id: 'about' },
+                { name: 'Services', id: 'services' },
+                { name: 'Contact', id: 'contact' },
+              ].filter((item) =>
+                item.name.toLowerCase().includes(searchValue.toLowerCase())
+              ).length === 0 && (
+                <p className="text-center py-13 text-xs text-gray-400 ">
+                  No results found.
+                </p>
+              )}
+            </div>
+          </>
+        )}
+      </>
+    )}
+  </div>
+)}
+
 </div>
   </div>
 )}

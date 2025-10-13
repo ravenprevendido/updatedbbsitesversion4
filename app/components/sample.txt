@@ -1,56 +1,177 @@
-{isSearchActive ? (
-  <div 
-    className={`
-      ${isSearchActive
-        ?  'opacity-100 translae-y-0 scale-100'
-        :  'opacity-0 -translate-2 scale-95 pointer-events-none absolute'
-      }
-      `}
-  >
-    <input  
-      type='text'
-      value={searchValue}
-      onChange={(e) => setSearchValue(e.target.value)}
-      placeholder='Search...'
-      className='bg-transparent border border-pink-300 text-white px-4 py-2 rounded-md focus:outline-none transition-all duration-300 w-64 placeholder:text-gray-500'
-    />
-    <button
-      type='button'
-      className='text-2xl p-2 mr-3'
-      onClick={() => {
-        setIsSearchActive(false);
-        setSearchValue('');
-      }}
-    >
-      <HiX className='text-pink-500'/>
-    </button>
+{/* feedback */}
+<div className="col-span-1 flex flex-col justify-between bg-[#1a1a1a] rounded-lg p-4 h-full">
+  <div className='flex justify-between items-center mb-2'>
+    <h3 className='text-pink-500 font-semibold text-lg'>Feedback</h3>
+    <button className='bg-white text-black text-xs px-2 py-1 rounded-1xl'>Latest</button>
   </div>
-) : (
+  {/* Randomized Feedback List */}
+  <div className="flex flex-col gap-3 overflow-y-auto max-h-[250px] bg-[#121212] p-3 rounded-md">
+    {Array.from({ length: Math.floor(Math.random() * 4) + 3 }).map((_, i) => {
+      const feedbackSamples = [
+        "Love the quality!",
+        "Fast and reliable service.",
+        "Highly recommend this product!",
+        "The design turned out amazing.",
+        "Excellent print and color accuracy.",
+        "Very satisfied with my order!",
+        "Looks even better in person!",
+        "Customer service was great too!",
+        "Affordable and top-notch!",
+      ];
+      const randomFeedback =
+        feedbackSamples[Math.floor(Math.random() * feedbackSamples.length)];
+      const randomDate = new Date(
+        2025,
+        Math.floor(Math.random() * 12),
+        Math.floor(Math.random() * 28) + 1
+      ).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+
+      return (
+        <div key={i} className="bg-[#181818] p-2 rounded-md text-gray-300 text-sm flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-pink-500 text-white">
+              👤
+            </div>
+            <span>{randomFeedback}</span>
+          </div>
+          <span className="text-xs text-gray-400 ml-8">{randomDate}</span>
+        </div>
+      );
+    })}
+  </div>
+</div>
 
 
 
 
-{/*  Search info box */}
-{searchValue.trim() === '' && (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{selectedProduct && (
   <motion.div
-    initial={{ opacity: 0, y: -10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    transition={{ duration: 0.3 }}
-    className="absolute mt-3 w-80 bg-zinc-900 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
   >
-    <Image
-      src="/burnboxlogo.png"
-      alt="Burnbox Logo"
-      width={40}
-      height={40}
-      className="object-contain"
-    />
-    <div className="text-center text-sm">
-      <p className="text-white font-semibold">Looking for something?</p>
-      <p className="text-xs text-gray-400">
-        Search Burnbox Printing for posts, photos and other visible activity.
-      </p>
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+      <div className="bg-[#211F1F] px-6 text-white rounded-xl w-full sm:w-3/4 md:w-4/5 lg:w-2/3 h-auto relative overflow-y-auto max-h-[90vh]">
+        <button onClick={() => setSelectedProduct(null)}>
+          <XCircleIcon className="absolute top-3 right-4 text-pink hover:text" />
+        </button>
+
+        {/* Modal content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full p-6 pt-14">
+          {/* Image Section */}
+          <div className="col-span-1 flex flex-col items-center justify-start gap-4">
+            <div className="relative w-full h-auto bg-black/50 rounded-md overflow-hidden flex items-center justify-center">
+              <ProductImageSlider images={selectedProduct.image} name={""} />
+            </div>
+          </div>
+
+          {/* Product Info Section */}
+          <div className="col-span-1 flex flex-col justify-start gap-4">
+            <h2 className="text-2xl font-semibold mb-2 text-center">{selectedProduct.name}</h2>
+            <p className="text-gray-200 mt-5">{selectedProduct.description}</p>
+            <p className="text-pink/30 text-4xl font-bold mt-3 pb-4">₱ {selectedProduct.price}</p>
+            <div className="flex flex-col gap-2 pr-5">
+              <button className="bg-pink/45 w-full text-white py-2 rounded hover:bg-pink/20 transition">Inquire Now</button>
+              <button className="border border-pink/60 text-pink/60 hover:bg-pink/10 w-full hover:text-white rounded transition py-2">Customize this item</button>
+            </div>
+          </div>
+
+          {/* Feedback Section */}
+          <div className="col-span-1 flex flex-col justify-between bg-[#1a1a1a] rounded-lg p-4 h-full">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-pink-500 font-semibold text-lg">Feedback</h3>
+              <button className="bg-white text-black text-xs px-2 py-1 rounded-1xl">Latest</button>
+            </div>
+
+            {/* Feedback items */}
+            <div className="flex flex-col gap-2 overflow-y-auto max-h-[180px] bg-[#121212] p-3 rounded-md">
+              <div className="flex justify-between items-center text-gray-300 text-sm">
+                <div className="w-6 h-6 flex items-center justify-center rounded-full bg-pink-500 text-white">
+                  👤
+                </div>
+                <span>This is amazing Product</span>
+              </div>
+              <span className="text-xs text-gray-400">nov 1, 2025</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Related Products Button */}
+        <div className="absolute bottom-6 left-0 w-full flex flex-col items-center">
+          <motion.button
+            onClick={() => setShowRelated((prev) => !prev)}
+            className="flex items-center gap-2 text-pink hover:text-pink/70 transition"
+            initial={false}
+            animate={{ y: showRelated ? -10 : 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          >
+            <ChevronDownIcon className={`w-6 h-6 transition-transform ${showRelated ? "rotate-180" : ""}`} />
+            <span className="text-sm uppercase font-medium mt-1">You Might Also Like</span>
+          </motion.button>
+
+          <AnimatePresence>
+            {showRelated && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4 }}
+                className="mt-4 w-full overflow-x-auto px-6"
+              >
+                <div className="flex gap-4 pb-4">
+                  {selectedProduct?.related?.map((item, i) => (
+                    <div
+                      key={i}
+                      onClick={() => setSelectedProduct({ ...item, related: getRandomRelated(item.id) })}
+                      className="relative w-40 h-36 md:w-48 md:h-40 bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden cursor-pointer group hover:scale-[1.03] transition-all duration-300"
+                    >
+                      <Image src={item.image[0]} alt={item.name} fill className="object-contain transition-transform duration-300 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-2">
+                        <h3 className="text-lg font-semibold text-white">{item.name}</h3>
+                        <p className="text-pink-500 text-lg mt-1">₱{item.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </div>
   </motion.div>
 )}
@@ -58,12 +179,279 @@
 
 
 
-<div 
-  className={`
-    relative
-    ${isSearchActive
-      ? 'opacity-100 translate-y-0 scale-100'
-      : 'opacity-0 -translate-2 scale-95 pointer-events-none absolute'
-    }
-  `}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* Inquire Now Button */}
+<button
+  onClick={() => setShowInquiry(true)}
+  className="bg-pink/70 hover:bg-pink text-white py-2 rounded transition"
 >
+  Inquire Now
+</button>
+
+{/* Inquiry Modal */}
+{showInquiry && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div className="bg-[#1a1a1a] text-white p-6 rounded-xl w-full max-w-md relative">
+      {/* Close Button */}
+      <button
+        onClick={() => setShowInquiry(false)}
+        className="absolute top-3 right-4 text-gray-400 hover:text-pink transition"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-semibold text-pink mb-4">
+        Inquire About This Product
+      </h2>
+
+      {/* Product Summary */}
+      <div className="flex items-center gap-3 mb-4">
+        <Image
+          src={selectedProduct.image[0]}
+          alt={selectedProduct.name}
+          width={60}
+          height={60}
+          className="rounded-md object-contain"
+        />
+        <div>
+          <h3 className="text-lg font-medium">{selectedProduct.name}</h3>
+          <p className="text-sm text-gray-400">₱ {selectedProduct.price}</p>
+        </div>
+      </div>
+
+      {/* Inquiry Form */}
+      <form className="flex flex-col gap-3">
+        <input
+          type="text"
+          placeholder="Your Name"
+          className="bg-black/50 border border-pink/40 rounded-md px-3 py-2 text-sm text-gray-200 focus:ring-1 focus:ring-pink outline-none"
+        />
+        <input
+          type="email"
+          placeholder="Your Email"
+          className="bg-black/50 border border-pink/40 rounded-md px-3 py-2 text-sm text-gray-200 focus:ring-1 focus:ring-pink outline-none"
+        />
+        <textarea
+          placeholder="Tell us what you’d like to know or customize..."
+          rows={4}
+          className="bg-black/50 border border-pink/40 rounded-md px-3 py-2 text-sm text-gray-200 focus:ring-1 focus:ring-pink outline-none resize-none"
+        />
+        <button
+          type="submit"
+          className="bg-pink/70 hover:bg-pink transition-all text-white py-2 rounded-md font-medium"
+        >
+          Send Inquiry
+        </button>
+      </form>
+
+      <p className="text-xs text-gray-400 text-center mt-3">
+        We'll get back to you within 24 hours via email.
+      </p>
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+
+<div className="absolute top-10 md:top-3 lg:top-3 right-4 flex items-center gap-1 text-pink hover:text-pink/80 cursor-pointer">
+  <span className="text-sm font-medium">Go back</span>
+  <ArrowRight className="w-4 h-4" />
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{selectedProduct && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <div className="fixed inset-0 pt-20 bg-black/70 flex items-center justify-center z-50 overflow-y-auto">
+      <div className="bg-[#211F1F] px-4 md:px-6 text-white rounded-xl w-full max-w-6xl relative h-auto md:h-[90vh] overflow-y-auto">
+        <button onClick={() => setSelectedProduct(null)}>
+          <ArrowRight className="absolute top-3 right-4 text-pink hover:text" />
+        </button>
+
+        {/* Main grid layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full p-4 md:p-6 pt-14">
+          {/* Image Section */}
+          <div className="col-span-1 flex flex-col items-center justify-start gap-4">
+            <div className="relative w-full h-64 sm:h-72 md:h-80 bg-black/50 rounded-md overflow-hidden flex items-center justify-center">
+              <ProductImageSlider images={selectedProduct.image} name={''} />
+            </div>
+          </div>
+
+          {/* Product Info Section */}
+          <div className="col-span-1 flex flex-col justify-start gap-4 text-center md:text-left">
+            <h2 className="text-2xl font-semibold mb-2">{selectedProduct.name}</h2>
+            <p className="text-gray-200 mt-2 text-sm md:text-base">{selectedProduct.description}</p>
+            <p className="text-pink/30 text-3xl md:text-4xl font-bold mt-3">₱ {selectedProduct.price}</p>
+
+            <div className="flex flex-col sm:flex-row md:flex-col gap-2 mt-4">
+              <button
+                onClick={() => setShowInquiry(true)}
+                className="bg-pink/45 flex-1 text-white py-2 rounded hover:bg-pink/20 transition"
+              >
+                Inquire Now
+              </button>
+              <button className="border border-pink/60 text-pink/60 hover:bg-pink/10 hover:text-white rounded transition py-2 flex-1">
+                Customize this item
+              </button>
+            </div>
+          </div>
+
+          {/* Feedback Section */}
+          <div className="col-span-1 bg-[#1a1a1a] rounded-lg p-4 flex flex-col h-full">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-pink-500 font-semibold text-lg">Feedback</h3>
+              <button className="bg-gradient-to-r from-black/20 via-pink/40 text-pink-200 font-bold text-xs px-2 py-1 rounded">
+                Latest
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3 overflow-y-auto max-h-[250px] sm:max-h-[300px] bg-[#121212] p-3 rounded-md scrollbar-thin">
+              {Array.from({ length: Math.floor(Math.random() * 4) + 3 }).map((_, i) => {
+                const feedbackSamples = [
+                  "Love the quality!",
+                  "Fast and reliable service.",
+                  "Highly recommend this product!",
+                  "The design turned out amazing.",
+                  "Excellent print and color accuracy.",
+                  "Very satisfied with my order!",
+                  "Looks even better in person!",
+                  "Customer service was great too!",
+                  "Affordable and top-notch!",
+                ];
+                const randomFeedback =
+                  feedbackSamples[Math.floor(Math.random() * feedbackSamples.length)];
+                const randomDate = new Date(
+                  2025,
+                  Math.floor(Math.random() * 12),
+                  Math.floor(Math.random() * 28) + 1
+                ).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                });
+                return (
+                  <div key={i} className="bg-[#181818] p-2 rounded-md text-gray-300 text-sm flex flex-col gap-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 flex items-center justify-center rounded-full bg-pink-500 text-white">
+                        👤
+                      </div>
+                      <span>{randomFeedback}</span>
+                    </div>
+                    <span className="text-xs text-gray-400 ml-8">{randomDate}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Related Products */}
+        <div className="w-full flex flex-col items-center mt-6 border-t border-pink/20 pt-4">
+          <motion.button
+            className="flex items-center gap-2 text-pink hover:text-pink/70 transition"
+            initial={false}
+            animate={{ y: showRelated ? -10 : 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          >
+            <span className="text-[18px] sm:text-[20px] uppercase font-medium">
+              You Might Also Like
+            </span>
+          </motion.button>
+
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4 }}
+              className="mt-6 w-full overflow-x-auto px-4 sm:px-6"
+            >
+              <div className="flex gap-4 pb-4">
+                {selectedProduct?.related?.map((item: any, i: number) => (
+                  <div
+                    key={i}
+                    onClick={() =>
+                      setSelectedProduct({
+                        ...item,
+                        related: getRandomRelated(item.id),
+                      })
+                    }
+                    className="relative w-40 sm:w-52 h-40 sm:h-48 bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden cursor-pointer group hover:scale-[1.03] transition-all duration-300"
+                  >
+                    <Image
+                      src={item.image[0]}
+                      alt={item.name}
+                      fill
+                      className="object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-2">
+                      <h3 className="text-sm sm:text-lg font-semibold text-white">{item.name}</h3>
+                      <p className="text-pink-500 text-sm sm:text-lg mt-1">₱{item.price}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)}
