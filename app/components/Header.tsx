@@ -15,18 +15,19 @@ import TooltipServices from './TooltipServices';
 import AboutTooltip from './AboutTooltip';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useHeaderContext } from '../context/HeaderContext';
-import { clear } from 'console';
+
 // header props
+
+
 
 const Header: React.FC = () => {
 
-const {searchValue, setSearchValue, setSelectedServiceFromHeader} = useHeaderContext();
+const {searchValue, setSearchValue, filteredProducts, selectProductById, setSelectedServiceFromHeader} = useHeaderContext();
 
 const pathname = usePathname();
 
 const handleTooltipServiceClick = (serviceName: string) => {
   const encoded = encodeURIComponent(serviceName);
-
   if (pathname === "/services") {
     
     setSelectedServiceFromHeader(serviceName);
@@ -34,6 +35,23 @@ const handleTooltipServiceClick = (serviceName: string) => {
     router.push(`/services?selected=${encoded}`);
   }
 };
+
+
+const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  setSearchValue(value);
+  setIsLoading(true);
+
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 500)
+};
+
+
+const handleClearSearch = () => {
+  setSearchValue("");
+  setIsSearchActive(false);
+}
 
 const [isSearchActive, setIsSearchActive] = useState(false);
 const router = useRouter()
@@ -50,7 +68,6 @@ const router = useRouter()
     router.push(`/?scrollTo=${sectionId}`);
   }
  };
-
 
  const searchParams = useSearchParams();
  useEffect(() => {
@@ -79,81 +96,22 @@ const router = useRouter()
   const aboutList = ['About Us', 'Mission and Vission', 'Why Choose Burnbox Printing?'];
   
   const servicesList  = [
-    {
-    id: 1,
-    name: "Digital & Offset Printing"
-    },
-  {
-    id: 2,
-    name: "Forms & reciepts",
-  },
-  { 
-    id: 3,
-    name: "Panaflex-Signage" 
-  },
-  {
-    id: 4,
-    name: "Large format Services" 
-  },
-  { 
-    id: 5,
-    name: "Sticker & Labels" 
-  },
-  { 
-    id: 6,
-    name: "Acrylic Build-up" 
-  },
-  { 
-    id: 7,
-    name: "Standee Signage" 
-  },
-  { 
-    id: 8,
-    name: "Wall Mural" 
-  },
-  { 
-    id: 9,
-    name: "Glass Frosted Sticker" 
-  },
-  { 
-    id: 10,
-    name: "Sticker On Sintra" 
-  },
-  { 
-    id: 11,
-    name: "Graphic Design" 
-  },
-  { 
-    id: 12,
-    name: "Logo design" 
-  },
-  
- { 
-    id: 14,
-    name: "Flyer Design" 
-  },
- 
-  // { 
-  //   id: 16,
-  //   name: "X-Banner & Portable Booth" 
-  // },
- 
-  // { 
-  //   id: 17,
-  //   name: "Brochures / Company Profile" 
-  // },
- 
-    // { 
-  //   id: 18,
-  //   name: "Brochures / Company Profile" 
-  // },
-
-  { 
-    id: 13,
-    name: "Other services.", 
+    { id: 1, name: "Digital & Offset Printing" },
+    { id: 2, name: "Forms & reciepts",},
+    { id: 3, name: "Panaflex-Signage"},
+    { id: 4, name: "Large format Services"},
+    { id: 5, name: "Sticker & Labels"},
+    { id: 6, name: "Acrylic Build-up"},
+    { id: 7, name: "Standee Signage"},
+    { id: 8, name: "Wall Mural"},
+    { id: 9, name: "Glass Frosted Sticker"},
+    { id: 10,name: "Sticker On Sintra"},
+    { id: 11,name: "Graphic Design"},
+    { id: 12,name: "Logo design" },
+    { id: 14,name: "Flyer Design"},
+    { id: 13,name: "Other services.", 
     nestedTooltip: ["Receipt types", "Forms customization", "Bulk orders", 
     ],
-    
  },
 ];
 
@@ -169,7 +127,7 @@ const router = useRouter()
   const hideTooltipTimeout = useRef<NodeJS.Timeout | null>(null);
   const hideTimeout = useRef<NodeJS.Timeout | null>(null);
   const [isMobile, setIsMobile] = useState(false);
- 
+  const [isLoading, setIsLoading] = useState(false);
 
   const filteredList = list.filter((item) => {
     return item.toLowerCase().includes(searchValue.toLowerCase())
@@ -268,6 +226,7 @@ const handleMobileNavClick = (id: string) => {
     setShowAboutTooltip(true);  // Show tooltip when mouse is over it
 
   };
+
   // Handle mouse leave the Tooltip component
   const handleMouseLeaveTooltipAbout = () => {
     setIsHoveringTooltip(false);  // Set flag to false when leaving the tooltip
@@ -275,6 +234,8 @@ const handleMobileNavClick = (id: string) => {
       setShowAboutTooltip(false);  // Hide tooltip after delay
     }, 200); 
   };
+
+  
   return (
     <div className='h-20 w-full flex items-center justify-between px-5 py-3 text-white font-extralight text-lg z-100 bg-black fixed'>
       {/* Logo */}
@@ -362,69 +323,107 @@ const handleMobileNavClick = (id: string) => {
       {/* cart */}
           </>
         ): (
-          <div 
-            className={`
-              ${isSearchActive
-                ?  'opacity-100 translae-y-0 scale-100'
-                :  'opacity-0 -translate-2 scale-95 pointer-events-none absolute'
-              }
-              `}
-            >
-            <input  
-              type='text'
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder='Search...'
-              className='bg-transparent border border-pink-300 text-white px-4 py-2 rounded-md focus:outline-none transition-all duration-300 w-64 placeholder:text-gray-500'
-            />
-            <button
-              type='button'
-              className='text-2xl p-2 mr-3'
-              onClick={() => {
-                setIsSearchActive(false);
-                setSearchValue('');
-              }}
-            >
-              <HiX className='text-pink-500'/>
-           </button>
-          {searchValue.trim() === ''? (
-            <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="absolute mt-3 w-65 bg-zinc-900 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3"
-          >
-            <Image
-              src="/bblogo.png"
-              alt="Burnbox Logo"
-              width={50}
-              height={40}
-              className="object-contain"
-            />
-            <div className="text-center text-sm">
-              <p className="text-white font-semibold">Looking for something?</p>
-              <p className="text-xs text-gray-400">
-                Search Burnbox Printing for posts, photos and other visible activity.
-              </p>
-            </div>
-          </motion.div>
-          ) : (
-            <>
-              {searchValue.length < 2 ? (
-                <div className='flex flex-col items-center'>
-                  <div></div>
-                  <p>Searching</p>
+
+          // search bar lines
+          <div
+                className={`
+                  ${isSearchActive
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none absolute"}
+                  transition-all duration-300 relative
+                `}
+              >
+                {/* Search Input */}
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    placeholder="Search..."
+                    className="bg-transparent border border-pink-300 text-white px-4 py-2 rounded-md focus:outline-none transition-all duration-300 w-64 placeholder:text-gray-500"
+                  />
+                  <button
+                    type="button"
+                    className="text-2xl p-2 mr-3"
+                    onClick={() => {
+                      setIsSearchActive(false);
+                      setSearchValue("");
+                    }}
+                  >
+                    <HiX className="text-pink-500" />
+                  </button>
                 </div>
-              ) : (
-                <>
-                  <div></div>
-                </>
-              )}
-            </>
-          )}
-        </div>
-          )}
+
+                {/* Conditional Content */}
+                <AnimatePresence>
+            {searchValue.trim() === "" ? (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="absolute mt-3 w-[260px] bg-zinc-900 text-gray-300 rounded-xl shadow-lg border border-gray-700 p-4 flex flex-col items-center gap-3 z-50"
+              >
+                <Image
+                  src="/bblogo.png"
+                  alt="Burnbox Logo"
+                  width={50}
+                  height={40}
+                  className="object-contain"
+                />
+                <div className="text-center text-sm">
+                  <p className="text-white font-semibold">Looking for something?</p>
+                  <p className="text-xs text-gray-400">
+                    Search Burnbox Printing for posts, photos, and other visible activity.
+                  </p>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute mt-3 w-[265px] bg-zinc-900 border border-gray-700 rounded-xl shadow-lg p-2 z-50 max-h-[320px] overflow-y-auto"
+              >
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map((product) => (
+                    <button
+                      key={product.id}
+                      onClick={() => {
+                        selectProductById(product.id); // <- ito yung mag-oopen ng modal sa ServicesProduct
+                        setSearchValue("");
+                        setIsSearchActive(false);
+                      }}
+                      className="w-full text-left flex items-center gap-3 p-2 rounded-md hover:bg-zinc-800 transition"
+                    >
+                      
+                      <div className="w-14 h-14 relative flex-shrink-0 rounded overflow-hidden bg-zinc-800">
+                        <Image
+                          src={product.image[0]}
+                          alt={product.name}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-white">{product.name}</p>
+                        <p className="text-xs text-pink-400">₱ {product.price}</p>
+                      </div>
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-gray-400 text-center py-3">No products found.</p>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+              </div>
+            )
+          }
+   {/* end of searchbar */}
+
       </div>
           {/* right side */}
         <div className='hidden md:flex ml-4'>
@@ -485,7 +484,6 @@ const handleMobileNavClick = (id: string) => {
             router.push('/contact#contact')
             setMobileMenuOpen(false)
           } 
-          
         }}
           className="flex items-center gap-2 text-left hover:text-pink transition"
         >
@@ -543,7 +541,6 @@ const handleMobileNavClick = (id: string) => {
               "Mission and Vission": "/about#mission-and-vision",
               "Why Choose Burnbox Printing?": "#why-choose-burnbox",
             };
-
             const target = routeMap[label];
             if (!target) return;
 

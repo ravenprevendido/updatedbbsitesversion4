@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import WhyChooseBurnboxPage from "./components/WhyChooseBurnBox";
 import GalleryPhotos from "./components/GalleryPhotos";
 
+
 export default function Home() {
   const [videoVisible, isVideoVisible] = useState(true);
   const [showEmailPopup, setShowEmailPopup] = useState(false);
@@ -24,7 +25,7 @@ export default function Home() {
   return (
     <main className="h-full max-w-full flex flex-col  bg-black relative overflow-x-hidden p-0 m-0">
       <Suspense fallback={<></>}>
-      <Header />
+      <Header/>
         </Suspense>
       {videoVisible && <IntroductionVideo isVideoVisible={isVideoVisible} />}
       <AnimatePresence mode="wait">

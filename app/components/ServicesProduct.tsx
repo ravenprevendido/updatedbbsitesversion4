@@ -7,6 +7,7 @@ import { ArrowBigRightDash, ArrowRight, ChevronDown, ChevronDownIcon, User2Icon,
 import { AnimatePresence, motion } from 'framer-motion'
 import { EnvelopeIcon } from '@heroicons/react/16/solid'
 import FakeInquiryForm from './FakeInquiryForm'
+import { useHeaderContext } from '../context/HeaderContext'
 
 const ProductImageSlider = ({ images, name }: { images: string[], name: string }) => {
   const filledImages =
@@ -22,6 +23,7 @@ const ProductImageSlider = ({ images, name }: { images: string[], name: string }
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // auto slide every 3s
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % filledImages.length);
@@ -76,6 +78,9 @@ const ProductImageSlider = ({ images, name }: { images: string[], name: string }
 };
 
 const ServicesProduct = () => {
+
+
+    const {searchValue} = useHeaderContext();
     const products = [
         {
             id: 1,
@@ -237,8 +242,13 @@ const ServicesProduct = () => {
         },
     ]
 
-    
+    // changes the product
+    const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
+
+    
     const [page, setPage] = useState(1);
     const itemsPerPage = 12;
     const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -263,7 +273,7 @@ const ServicesProduct = () => {
     <>
     <div className='custom-gallery-bg w-full min-h-screen flex flex-col items-center py-20 '>
         <div className='grid grid-cols-1 sm:grid-cols-2 mt-30 lg:grid-cols-4 gap-6 w-[90%] lg:w-full max-w-7xl'>
-         {currentProducts.map((item) => (
+         {filteredProducts.slice(startIndex, startIndex + itemsPerPage).map((item) => (
             <div key={item.id} className='flex flex-col bg-white/20 border border-pink/20 rounded-xl overflow-hidden shadow hover:bg-white/50 hover:scale-[1.06] cursor-pointer transition-all duration-300'>
                 <div className='relative w-full h-64'>
                     <Image
@@ -325,8 +335,8 @@ const ServicesProduct = () => {
                                 <button className='border border-pink/60 text-pink/60 hover:bg-pink/10 w-full  hover:text-white rounded transition py-2'>Customize this item</button>
                             </div>
                         </div>
-
                     {/* inquire now */}
+
                     <AnimatePresence>
                         {showInquiry && (
                             <motion.div
@@ -340,17 +350,17 @@ const ServicesProduct = () => {
                                 animate={{scale: 1, opacity: 1, y: 0}}
                                 exit={{scale: 0.8, opacity: 0, y: 30}}
                                 transition={{duration: 0.34, ease: 'easeOut'}}
-                                className='bg-[#1a1a1a] flex flex-col text-white p-6 rounded-xl w-full max-w-md relative'
+                                className='bg-[#1a1a1a] flex flex-col text-white p-6 rounded-xl w-full max-h-5/6 overflow-x-hidden max-w-md relative mt-20'
                                 >
                                     {/* button */}
                                     <button
                                         onClick={() => setShowInquiry(false)}
-                                        className='absolute top-3  text-gray-400 hover:text-pink transition'
+                                        className='absolute top-3 right-7  text-gray-400 hover:text-pink transition'
                                     >
-                                        <ArrowBigRightDash/>
+                                        <ArrowBigRightDash className=''/>
                                     </button>
-                                      <h2 className='text-2xl items-center justify-center  font-semibold mt-4 text-pink mb-4'>Inquire About This Product</h2>
-
+                                    
+                                      <h2 className='text-[22px] items-center justify-center text-center font-stretch-50% mt-4 text-pink-500 mb-4'>Inquire About This Product</h2>
                                       {/* product */}
                                       <div
                                       >
@@ -359,15 +369,15 @@ const ServicesProduct = () => {
                                             alt={selectedProduct.name}
                                             width={300}
                                             height={60}
-                                            className='rounded-md object-contain ml-10 aspect-square'
-                                        
+                                            className='rounded-md object-contain ml-12 aspect-square max-h-40'
                                         />
+
                                         <div>
                                             <h3 className='text-lg font-medium'>{selectedProduct.name}</h3>
                                             <p className='text-sm text-gray-400'>₱ {selectedProduct.price}</p>
                                         </div>
-                                      </div>
 
+                                      </div>
                                       {/* form */}
                                    <FakeInquiryForm/>
                             </motion.div>
@@ -421,9 +431,7 @@ const ServicesProduct = () => {
                         </div>
                     </div>
                     {/* feedback end lines */}
-
                 </div>
-
                 {/* you might also like images */}
                 <div className="relative lg:absolute bottom-1 left-0 w-full flex flex-col items-center bg-gradient-to-r from-black/40 via-black/80">
             <motion.button
