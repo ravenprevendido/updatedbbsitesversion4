@@ -36,9 +36,12 @@ export default function HeaderWrapper() {
 
   useEffect(() => {
     // Mobile Tap sequence (tripple tap on hidden)
-    const mobileTap = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
+    const mobileTap = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if(!touch) return;
+
+      const x = touch.clientX;
+      const y = touch.clientY;
       const width = window.innerWidth;
       const height = window.innerHeight;
 
@@ -57,8 +60,8 @@ export default function HeaderWrapper() {
       }
     }
 
-    window.addEventListener("click", mobileTap);
-    return () => window.removeEventListener("click", mobileTap);
+    window.addEventListener("touchstart", mobileTap);
+    return () => window.removeEventListener("touchstart", mobileTap);
   }, [tapCount, router]);
 
 
@@ -70,6 +73,8 @@ export default function HeaderWrapper() {
     }
   })
 
+
+  
   // naka hide dito si header kahit globally
   if (pathname.startsWith("/admin")) return null;
 
