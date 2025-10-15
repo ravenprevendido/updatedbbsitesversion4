@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface FbPost {
   id: string;
@@ -58,6 +59,14 @@ const GalleryPhotos: React.FC = () => {
   if (posts.length === 0) return <p className="text-center">No posts with images found.</p>;
 
   return (
+    <AnimatePresence>
+    <motion.div
+      initial={{opacity: 0, scale: 0.8}}
+      whileInView={{opacity: 1, scale: 1}}
+      transition={{duration: 0.7, ease: "easeOut"}}
+      exit={{opacity:0}}
+      viewport={{once: false, amount: 0.4}}
+    >
     <section id='gallery' className="relative min-h-screen custom-gallery-bg w-full  px-4 py-20 flex flex-col items-center overflow-hidden ">
       <img className='absolute opacity-10 items-center ml-350 mt-30' src="/burnboxlogo.png" alt="Background Logo" />
       <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center text-pink mb-12">Gallery</h1>
@@ -95,6 +104,7 @@ const GalleryPhotos: React.FC = () => {
             <SwiperSlide key={`${post.id}_${index}`} className="flex justify-center">
              <div className="w-[350px] h-[400px] border  p-2 rounded shadow bg-white overflow-hidden gap-2">
               <a href={fbPostUrl} target="_blank" rel="noopener noreferrer">
+             
                 <Image
                   src={img}
                   alt={post.message || 'Facebook Image'}
@@ -104,6 +114,7 @@ const GalleryPhotos: React.FC = () => {
                   unoptimized
                 
                 />
+             
               </a>
             </div>
             </SwiperSlide>
@@ -111,6 +122,8 @@ const GalleryPhotos: React.FC = () => {
         })}
       </Swiper>
     </section>
+    </motion.div>
+    </AnimatePresence>
   );
 };
 

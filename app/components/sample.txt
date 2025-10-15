@@ -1,74 +1,28 @@
-  // Handle File input
-  const handleFiles = (files: FileList) => {
-    const newFiles = Array.from(files);
-    setImages((prev) => [...prev, ...newFiles]);
-  };
+import { motion } from "framer-motion";
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files) handleFiles(e.dataTransfer.files);
-  };
-
-  const removeImage = (index: number) => {
-    setImages((prev) => prev.filter((_, i) => i !== index));
-  };
-
-
-
-
- {/* 🔹 Drag & Drop Upload */}
-      <div
-        onDragOver={(e) => {
-          e.preventDefault();
-          setIsDragging(true);
+<SwiperSlide key={`${post.id}_${index}`} className="flex justify-center">
+  <div className="w-[350px] h-[400px] border p-2 rounded shadow bg-white overflow-hidden gap-2">
+    <a href={fbPostUrl} target="_blank" rel="noopener noreferrer">
+      <motion.div
+        className="w-full h-full"
+        animate={{ x: [0, 20, -20, 0] }} // horizontal pan animation
+        transition={{
+          duration: 10,       // adjust speed
+          repeat: Infinity,   // loop forever
+          repeatType: "loop", // smooth looping
+          ease: "linear"      // constant speed
         }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={handleDrop}
-        className={`border-2 border-dashed rounded-md p-4 text-center transition-all cursor-pointer ${
-          isDragging
-            ? "border-pink bg-pink/10"
-            : "border-pink/40 bg-black/40 hover:bg-black/60"
-        }`}
+        whileHover={{ x: 0 }} // stop movement on hover
       >
-        <input
-          type="file"
-          multiple
-          accept="image/*"
-          onChange={(e) => e.target.files && handleFiles(e.target.files)}
-          className="hidden"
-          id="imageUpload"
-          disabled={isSubmitting}
+        <Image
+          src={img}
+          alt={post.message || 'Facebook Image'}
+          width={300}
+          height={340}
+          className="w-full h-full object-cover rounded"
+          unoptimized
         />
-        <label htmlFor="imageUpload" className="cursor-pointer flex flex-col items-center">
-          <ImageIcon className="w-6 h-6 text-pink mb-2" />
-          <p className="text-sm text-gray-300">
-            Drag & drop images here or <span className="text-pink">browse</span>
-          </p>
-        </label>
-
-        {/* Preview Thumbnails */}
-        {images.length > 0 && (
-          <div className="mt-3 flex flex-wrap justify-center gap-3">
-            {images.map((file, index) => (
-              <div
-                key={index}
-                className="relative group w-20 h-20 border border-pink/30 rounded-md overflow-hidden"
-              >
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={`preview-${index}`}
-                  className="w-full h-full object-cover"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-1 right-1 bg-black/70 rounded-full p-1 opacity-0 group-hover:opacity-100 transition"
-                >
-                  <X size={12} className="text-pink" />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      </motion.div>
+    </a>
+  </div>
+</SwiperSlide>

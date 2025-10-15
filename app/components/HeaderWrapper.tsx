@@ -36,7 +36,6 @@ export default function HeaderWrapper() {
   }, [router])
 
 
-
   useEffect(() => {
     // Mobile Tap sequence (tripple tap on hidden)
     const mobileTap = (e: TouchEvent) => {

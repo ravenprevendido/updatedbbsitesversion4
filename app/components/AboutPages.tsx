@@ -4,6 +4,8 @@ import MissionVission from './MissionVission'
 
 const AboutPages = () => {
   return (
+
+    
     <section className='min-h-[100vh]  text-white flex flex-col relative items-center  overflow-hidden'>
          <motion.div
           initial={{opacity: 0, y: 30}}
