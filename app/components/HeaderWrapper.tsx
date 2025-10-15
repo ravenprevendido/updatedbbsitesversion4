@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Header from "./Header";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HeaderWrapper() {
   const pathname = usePathname();
@@ -10,11 +10,14 @@ export default function HeaderWrapper() {
   const [allowAdmin, setAllowAdmin] = useState(false);
   // hide header for all admin routes
   
-  
-  // mobile gesture password pattern to make admin accesible
-  const touchStartRef = useRef<{x: number; y:number} | null>(null);
-  const patternRef = useRef<string>("");
+  // track taps for mobile
+  const [tapCount, setTapCount] = useState(0);
+  let tapTimer: NodeJS.Timeout;
 
+
+  
+
+  
   // useeffect for the keyboard shortcus access key for admin
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
@@ -33,46 +36,37 @@ export default function HeaderWrapper() {
   }, [router])
 
 
+
   useEffect(() => {
-    const handleTouchStart = (e: TouchEvent) => {
+    // Mobile Tap sequence (tripple tap on hidden)
+    const mobileTap = (e: TouchEvent) => {
       const touch = e.touches[0];
-      touchStartRef.current = { x: touch.clientX, y: touch.clientY };
-    };
+      if(!touch) return;
 
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (!touchStartRef.current) return;
-      const touch = e.changedTouches[0];
-      const dx = touch.clientX - touchStartRef.current.x;
-      const dy = touch.clientY - touchStartRef.current.y;
+      const x = touch.clientX;
+      const y = touch.clientY;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
-      let dir = "";
-      if (Math.abs(dx) > Math.abs(dy)) {
-        dir = dx > 0 ? "R" : "L"; // Right or Left
-      } else {
-        dir = dy > 0 ? "D" : "U"; // Down or Up
-      }
+      // top left corner are 
+      if(x > width * 0.1 || y > height * 0.1) return;
 
-      patternRef.current += dir;
+      setTapCount((prev) => prev + 1);
 
-      // Check if the pattern matches "UDLR" for example
-      if (patternRef.current.includes("UUDDLRLR")) {
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => setTapCount(0), 1000);
+
+      if(tapCount + 1 >= 3) {
         setAllowAdmin(true);
-        router.push("/admin");
-        patternRef.current = "";
+        router.push("/admin")
+        setTapCount(0)
       }
+    }
 
-      // Reset pattern after 2 seconds idle
-      setTimeout(() => (patternRef.current = ""), 2000);
-    };
+    window.addEventListener("touchstart", mobileTap);
+    return () => window.removeEventListener("touchstart", mobileTap);
+  }, [tapCount, router]);
 
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [router]);
 
 
   //block admin if shortcut key hasn't been use dapat short cutkey gagamitin
