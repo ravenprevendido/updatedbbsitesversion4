@@ -24,7 +24,6 @@ export default function HeaderWrapper() {
     }
 
 
-
     window.addEventListener("keydown", handleKeydown);
 
     return() => {
@@ -74,7 +73,6 @@ export default function HeaderWrapper() {
   })
 
 
-  
   // naka hide dito si header kahit globally
   if (pathname.startsWith("/admin")) return null;
 
