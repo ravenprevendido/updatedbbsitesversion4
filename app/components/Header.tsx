@@ -46,13 +46,10 @@ const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsLoading(false);
   }, 500)
 };
-
-
 const handleClearSearch = () => {
   setSearchValue("");
   setIsSearchActive(false);
 }
-
 const [isSearchActive, setIsSearchActive] = useState(false);
 const router = useRouter()
 
@@ -65,10 +62,11 @@ const router = useRouter()
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
   } else {
-    router.push(`/?scrollTo=${sectionId}`);
+    // Not on home page — store target section, then go home
+    sessionStorage.setItem("scrollToSection", sectionId);
+    router.push("/", { scroll: false }); // no query, no hash
   }
- };
-
+ }; 
  const searchParams = useSearchParams();
  useEffect(() => {
   const scrollTo = searchParams?.get('scrollTo');
@@ -115,6 +113,8 @@ const router = useRouter()
  },
 ];
 
+
+
   const buttons = ['wallmural', 'labelsticker', 'photocanvas', 'pvclanyard']
   const [showToolTip, setToolTip] = useState(false)
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -141,8 +141,6 @@ const router = useRouter()
       }
     }
   }
-
-
 
   useEffect(() => {
     // detect 
@@ -235,7 +233,6 @@ const handleMobileNavClick = (id: string) => {
     }, 200); 
   };
 
-  
   return (
     <div className='h-20 w-full flex items-center justify-between px-5 py-3 text-white font-extralight text-lg z-100 bg-black fixed'>
       {/* Logo */}

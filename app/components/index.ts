@@ -8,7 +8,7 @@ import Maps from "./Maps";
 
 
 export {
-    Header,
+  
     CardCarousel,
     IntroductionVideo,
     EmailPopup,

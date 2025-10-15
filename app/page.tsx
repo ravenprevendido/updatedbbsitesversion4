@@ -1,21 +1,20 @@
 "use client";
-
 import { Suspense, useEffect, useState } from "react";
-import { Header, CardCarousel,IntroductionVideo, EmailPopup, Maps} from "./components";
+import { CardCarousel,IntroductionVideo, EmailPopup, Maps} from "./components";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import Footer from "./components/Footer";
-import { useSearchParams } from "next/navigation";
 import WhyChooseBurnboxPage from "./components/WhyChooseBurnBox";
 import GalleryPhotos from "./components/GalleryPhotos";
-
-
+import { HeaderProvider } from "./context/HeaderContext";
+import { TooltipProvider } from "./context/TooltipContext";
+import ServicesProduct from "./components/ServicesProduct";
 export default function Home() {
   const [videoVisible, isVideoVisible] = useState(true);
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [selectedServiceFromHeader, setSelectedServiceFromHeader] = useState<string | null>(null);
+  
   
   useEffect(() => {
     if (!videoVisible) {
@@ -24,10 +23,8 @@ export default function Home() {
   }, [videoVisible]);
   return (
     <main className="h-full max-w-full flex flex-col  bg-black relative overflow-x-hidden p-0 m-0">
-      <Suspense fallback={<></>}>
-      <Header/>
-        </Suspense>
-      {videoVisible && <IntroductionVideo isVideoVisible={isVideoVisible} />}
+      
+         {videoVisible && <IntroductionVideo isVideoVisible={isVideoVisible} />}
       <AnimatePresence mode="wait">
         {showEmailPopup && <EmailPopup setShowEmailPopup={setShowEmailPopup} />}
       </AnimatePresence>
@@ -67,6 +64,7 @@ export default function Home() {
       </div>
       <Maps /> 
      <Footer/>
+     
   </main>
   ); 
 }

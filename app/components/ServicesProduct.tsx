@@ -62,6 +62,7 @@ const ProductImageSlider = ({ images, name }: { images: string[], name: string }
               i === currentIndex ? "bg-pink-500" : "bg-gray-400/50"
             }`}
           >
+            
             <Image
               src={img}
               alt={`thumb-${i}`}
@@ -259,7 +260,7 @@ const ServicesProduct = () => {
   );
     const [selectedProduct, setSelectedProduct] = useState<any>(null);
     const [showRelated, setShowRelated] = useState(false);
-    const [showFeedback, setShowFeedback] = useState(false);
+
     // Randomize related products (except current one)
     const getRandomRelated = (excludeId: number) => {
         const others = products.filter((p) => p.id !== excludeId);
@@ -284,10 +285,9 @@ const ServicesProduct = () => {
                     />
                 </div>
                 <div className='p-4 flex flex-col gap-1 bg-black/40 mt-auto'>
-                    <h3 className='font-medium text-gray-100 text-[20px]'>{item.name}</h3>
+                    <h3 className='font-medium  text-gray-100 text-[20px]'>{item.name}</h3>
                     <div className='flex items-center gap-2 justify-between mt-2 text-pink-300'>
                         <span>Price: ₱ {item.price}</span>
-                        
                         <button onClick={() =>
                         setSelectedProduct({
                         ...item,
@@ -327,9 +327,9 @@ const ServicesProduct = () => {
                       </div>
                         {/* info */}    
                         <div className='cols-span-1 flex flex-col justify-start gap-4 w-[100%]  lg:pr-0  max-w-md mx-auto'>
-                            <h2 className='text-2xl font-semibold mb-2 text-center md:text-left'>{selectedProduct.name}</h2>
+                            <h2 className='text-2xl font-semibold mb-2  text-center md:text-left'>{selectedProduct.name}</h2>
                             <p className='text-gray-200 mt-5'>{selectedProduct.description}</p>
-                            <p className='text-pink/30 text-4xl font-bold mt-3 pb-4'> ₱ {selectedProduct.price}</p>
+                            <p className='text-pink/60 text-4xl font-bold mt-3 pb-4'> ₱ {selectedProduct.price}</p>
                             <div className='flex flex-col gap-2'>
                                 <button onClick={() => setShowInquiry(true)} className='bg-pink/45  lg:w-full text-white py-2 rounded hover:bg-pink/20 transition'>Inquire Now</button>
                                 <button className='border border-pink/60 text-pink/60 hover:bg-pink/10 w-full  hover:text-white rounded transition py-2'>Customize this item</button>
@@ -360,7 +360,7 @@ const ServicesProduct = () => {
                                         <ArrowBigRightDash className=''/>
                                     </button>
                                     
-                                      <h2 className='text-[22px] items-center justify-center text-center font-stretch-50% mt-4 text-pink-500 mb-4'>Inquire About This Product</h2>
+                                      <h2 className='text-[22px] items-center justify-center text-center font-extrabold mt-4 text-pink-500 mb-4'>Inquire Now</h2>
                                       {/* product */}
                                       <div
                                       >
