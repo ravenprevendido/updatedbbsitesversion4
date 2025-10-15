@@ -1,10 +1,18 @@
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
 const WhyChooseBurnboxPage = () => {
   return (
+   <motion.div
+    initial={{ scale: 0.8, opacity: 0 }}
+    animate={{ scale: 0.8, opacity: 1 }}
+    exit={{ scale: 0.8, opacity: 0 }}
+    transition={{ duration: 0.5 }}  
+    whileInView={{scale: 1}}
+    viewport={{once: false, amount: 0.4}}
+  >
     <section  className='bg-gray-100 text-white px-8 py-10 min-h-[55vh]'>
-       
       <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-12'>
         
          <div className='w-full'>
@@ -17,6 +25,7 @@ const WhyChooseBurnboxPage = () => {
           />
          </div>
          {/* about descriptuon */}
+    
          <div className='text-black space-y-8 text-sm md:text-base leading-relaxed'>
           <h1 className='text-3xl text-center text-pink-500 font-bold'>Why Choose burnbox Printing?</h1>
           <p className='text-black'>One-Stop Printing Partner - From business cards to massive billboards, we cover it all.
@@ -36,8 +45,11 @@ const WhyChooseBurnboxPage = () => {
             hassle-Free Service-Fast turnaround, expert installation, and after-sales support
           </p>
          </div>
+       
     </div>
+ 
     </section>
+</motion.div>
   )
 }
 

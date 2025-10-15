@@ -1,28 +1,85 @@
-import { motion } from "framer-motion";
+'use client'
+import React, { useState } from 'react'
+import { Menu, X, Home, Settings, LogOut, Edit3 } from 'lucide-react'
 
-<SwiperSlide key={`${post.id}_${index}`} className="flex justify-center">
-  <div className="w-[350px] h-[400px] border p-2 rounded shadow bg-white overflow-hidden gap-2">
-    <a href={fbPostUrl} target="_blank" rel="noopener noreferrer">
-      <motion.div
-        className="w-full h-full"
-        animate={{ x: [0, 20, -20, 0] }} // horizontal pan animation
-        transition={{
-          duration: 10,       // adjust speed
-          repeat: Infinity,   // loop forever
-          repeatType: "loop", // smooth looping
-          ease: "linear"      // constant speed
-        }}
-        whileHover={{ x: 0 }} // stop movement on hover
+const AdminDashboard = () => {
+  const [isOpen, setIsOpen] = useState(true)
+
+  return (
+    <div className="flex min-h-screen bg-gray-100">
+
+      {/* SIDEBAR */}
+      <div
+        className={`${
+          isOpen ? 'w-64' : 'w-20'
+        } bg-white border-r border-gray-200 transition-all duration-300 flex flex-col`}
       >
-        <Image
-          src={img}
-          alt={post.message || 'Facebook Image'}
-          width={300}
-          height={340}
-          className="w-full h-full object-cover rounded"
-          unoptimized
-        />
-      </motion.div>
-    </a>
-  </div>
-</SwiperSlide>
+        {/* Sidebar Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h1
+            className={`text-xl font-bold text-pink-600 transition-all duration-300 ${
+              !isOpen && 'hidden'
+            }`}
+          >
+            Admin Panel
+          </h1>
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+
+
+        {/* Sidebar Menu */}
+        <nav className="flex-1 p-4">
+          <ul className="space-y-3 text-gray-700">
+            <li className="flex items-center gap-3 hover:bg-pink-100 rounded-lg p-2 cursor-pointer">
+              <Home size={20} />
+              {isOpen && <span>Dashboard</span>}
+            </li>
+            <li className="flex items-center gap-3 hover:bg-pink-100 rounded-lg p-2 cursor-pointer">
+              <Edit3 size={20} />
+              {isOpen && <span>Edit Website</span>}
+            </li>
+            <li className="flex items-center gap-3 hover:bg-pink-100 rounded-lg p-2 cursor-pointer">
+              <Settings size={20} />
+              {isOpen && <span>Settings</span>}
+            </li>
+          </ul>
+        </nav>
+
+        {/* Logout Button */}
+        <div className="p-4 border-t border-gray-200">
+          <button className="flex items-center gap-3 text-gray-700 hover:text-pink-600 w-full">
+            <LogOut size={20} />
+            {isOpen && <span>Logout</span>}
+          </button>
+        </div>
+      </div>
+
+      {/* MAIN CONTENT AREA */}
+      <div className="flex-1 p-6">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Dashboard Overview</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Example Cards */}
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-gray-800">Inquiries</h3>
+            <p className="text-3xl font-bold text-pink-600 mt-3">120</p>
+          </div>
+
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-gray-800">Products</h3>
+            <p className="text-3xl font-bold text-pink-600 mt-3">25</p>
+          </div>
+
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-gray-800">Visitors</h3>
+            <p className="text-3xl font-bold text-pink-600 mt-3">530</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AdminDashboard

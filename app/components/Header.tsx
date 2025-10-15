@@ -129,6 +129,9 @@ const router = useRouter()
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+
+
+  
   const filteredList = list.filter((item) => {
     return item.toLowerCase().includes(searchValue.toLowerCase())
   });
